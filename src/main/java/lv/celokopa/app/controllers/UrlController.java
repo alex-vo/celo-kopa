@@ -1,6 +1,7 @@
 package lv.celokopa.app.controllers;
 
 import lv.celokopa.app.model.Drive;
+import lv.celokopa.app.oauth.DraugiemAuthorizer;
 import lv.celokopa.app.oauth.FacebookAuthorizer;
 import lv.celokopa.app.services.DriveService;
 import lv.celokopa.app.services.UserService;
@@ -36,6 +37,9 @@ public class UrlController {
     private FacebookAuthorizer facebookAuthorizer;
 
     @Autowired
+    private DraugiemAuthorizer draugiemAuthorizer;
+
+    @Autowired
     @Qualifier("currentHost")
     String currentHost;
 
@@ -47,6 +51,10 @@ public class UrlController {
     @Qualifier("facebookClientSecret")
     String facebookClientSecret;
 
+    @Autowired
+    @Qualifier("draugiemAppKey")
+    String draugiemAppKey;
+
     @RequestMapping(value="/facebookCallback", method = RequestMethod.GET)
     public String facebookCallback(HttpServletRequest request, @RequestParam("code") String code){
         facebookAuthorizer.authorize(facebookClientId, "http://" + currentHost + "/facebookCallback",
@@ -54,6 +62,21 @@ public class UrlController {
 
         return "redirect:/";
     }
+
+
+    @RequestMapping(value="/draugiemCallback", method = RequestMethod.GET)
+    public String facebookCallback(HttpServletRequest request, @RequestParam("dr_auth_status") String status,
+                                   @RequestParam("dr_auth_code") String code)
+            throws Exception {
+        if(!"ok".equals(status)){
+            throw new Exception("Unsuccessful draugiem.lv login.");
+        }
+
+        draugiemAuthorizer.authorize(draugiemAppKey, code);
+
+        return "redirect:/";
+    }
+
 
     @RequestMapping(value="/login", method = RequestMethod.GET)
     public String loginPage(HttpServletRequest request){

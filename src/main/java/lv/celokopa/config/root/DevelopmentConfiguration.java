@@ -3,6 +3,7 @@ package lv.celokopa.config.root;
 
 import lv.celokopa.app.init.TestDataInitializer;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -30,6 +31,9 @@ import java.util.Map;
 @Profile("development")
 @EnableTransactionManagement
 public class DevelopmentConfiguration extends WebMvcConfigurerAdapter {
+
+    @Value("${draugiem.app.key}")
+    String draugiemAppKey;
 
     @Bean(initMethod = "init")
     public TestDataInitializer initTestData() {
@@ -86,6 +90,11 @@ public class DevelopmentConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.setOrder(-1).addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
+
+    @Bean(name = "draugiemAppKey")
+    public String draugiemAppKey(){
+        return draugiemAppKey;
     }
 
 }

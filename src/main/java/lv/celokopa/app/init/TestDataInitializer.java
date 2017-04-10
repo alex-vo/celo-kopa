@@ -36,10 +36,10 @@ public class TestDataInitializer {
 
         User user = new User("test123", "Ivan", "Demidov", new Date(80, 3, 3), "About him", "Honda Accord",
                              "AA-7777", "$2a$10$x9vXeDsSC2109FZfIJz.pOZ4dJ056xBpbesuMJg3jZ.ThQkV119tS",
-                             "test@email.com", true, null, "/resources/static/test123.jpg", "lv_LV", null, null);
+                             "test@email.com", true, null, "/resources/static/test123.jpg", "lv_LV", null, null, null);
         User user1 = new User("alexvo", "Leha", "Voroncov", new Date(80, 3, 3), "About him", "Honda Accord",
                               "AA-7777", "$2a$04$6vP8bXbRBC5MXjBC3ZRM6e5ouMFP9oLJ3fCjR/9HEB33/I4GjKKaK",
-                              "avoroncovs@gmail.com", true, null, "/resources/static/test123.jpg", "lv_LV", null, null);
+                              "avoroncovs@gmail.com", true, null, "/resources/static/test123.jpg", "lv_LV", null, null, null);
         session.persist(user);
         session.persist(user1);
 
