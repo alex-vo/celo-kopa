@@ -1,0 +1,43 @@
+<main ng-controller="LoginCtrl">
+    <header class="pure-g" ng-include="'/resources/partials/header.html'"></header>
+    <div class="w-container">
+        <tt-error-messages></tt-error-messages>
+        <tt-success-messages></tt-success-messages>
+        <div class="w-form">
+            <form id="loginForm" name="loginForm" class="pure-form login-form" role="loginForm" ng-submit="loginForm.$valid && onLogin()">
+                <fieldset class="pure-group">
+                    <div class="edit-profile-heading">
+                        <h2>Авторизация</h2>
+                    </div>
+                    <!--<button class="btn btn-facebook btn-lg" ng-click="shareFacebook();"><i class="fa fa-facebook fa-2"></i>Поделиться</button>-->
+                    <div class="col-md-4 col-md-offset-4">
+                        <a class="btn btn-facebook btn-lg" href="http://www.facebook.com/dialog/oauth?client_id=1846099332311134&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2FfacebookCallback"><i class="fa fa-facebook fa-2"></i>Войти</a>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4">
+                        <label for="username" class="control-label">Логин или эл. почта</label>
+                        <div class="form-group">
+                            <input id="username" type="text" ng-focus="focus('username')" ng-blur="blur('username')" ng-model="vm.username"
+                                   name="username" class="form-control" data-error="Поле обязательно" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4">
+                        <label for="password" class="control-label">Пароль</label>
+                        <div class="form-group">
+                            <input id="password" type="password" ng-focus="focus('password')" ng-blur="blur('password')" ng-model="vm.password"
+                                   name="username" class="form-control" data-minlength="6" data-error="Минимум 6 символов" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="col-md-4 col-md-offset-4">
+                    <button type="submit" class="btn btn-primary offer-ride-button"><i class="glyphicon glyphicon-refresh spinning"></i>Войти</button>
+                </div>
+                <div class="col-md-4 col-md-offset-4">
+                    <a class="new-user-link" href="/register">Регистрация</a> <a class="new-user-link" href="/restore-password">Забыли пароль?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<div ng-include="'/resources/partials/footer.html'"></div>

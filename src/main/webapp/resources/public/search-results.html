@@ -1,0 +1,53 @@
+<main ng-controller="SearchResultsCtrl">
+    <header class="pure-g" ng-include="'/resources/partials/header.html'"></header>
+    <div class="w-container">
+        <tt-error-messages></tt-error-messages>
+        <tt-success-messages></tt-success-messages>
+        <div class="alert alert-info" role="alert" ng-hide="vm.foundRides.length > 0">
+            Uz doto brīdi piedāvāto braucienu nav.
+        </div>
+        <div class="table-container" ng-show="vm.foundRides.length > 0">
+            <table class="tablesaw search-results" data-tablesaw-mode="stack" tablesawrender>
+                <thead>
+                    <tr>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist" style="width: 250px;">Vaditajs</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3" style="width: 150px;">Izbraukšanas adrese</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" style="width: 150px;">Gala adrese</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Auto</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="5" style="width: 50px;">Brīvas vietas</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Cena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ride in vm.foundRides" ng-click="showRide(ride.id)">
+                        <td class="title">
+                            <div class="person">
+                                <div class="avatar-picture" style="background-image:url(/resources/static/{{ride.user.profileImage}})">
+                                    <!--<img no-cache-src="/resources/static/{{ride.user.profileImage}}" />-->
+                                </div>
+                                <div class="person-details">
+                                    <p>{{ride.user.name}} {{ride.user.surname}}</p>
+                                    <p>{{ride.user.age}} gadi</p>
+                                </div>
+                            </div>
+                            <div class="ride-details">
+                                <span class="from trip-roads-stop">{{ride.driveFrom}}</span>
+                                <span class="arrow-ie">→</span>
+                                <span class="trip-roads-stop">{{ride.driveTo}}</span>
+                            </div>
+                            <div class="ride-date">
+                                <span>{{ride.departure.dateString}} {{ride.departure.exactTime | date: 'HH:mm'}}</span>
+                            </div>
+                        </td>
+                        <td>{{ride.fromAddress}}</td>
+                        <td>{{ride.toAddress}}</td>
+                        <td>{{ride.user.car}}</td>
+                        <td>{{ride.placesLeft}}</td>
+                        <td class="price">{{ride.price}}€</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<div ng-include="'/resources/partials/footer.html'"></div>

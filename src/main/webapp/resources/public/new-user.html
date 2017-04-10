@@ -1,0 +1,64 @@
+<main ng-controller="NewUserCtrl">
+    <header class="pure-g" ng-include="'/resources/partials/header.html'"></header>
+    <div class="w-container">
+        <tt-error-messages></tt-error-messages>
+        <tt-success-messages></tt-success-messages>
+        <div class="w-form">
+            <form name="form" ng-submit="createUser()" class="pure-form login-form" novalidate>
+                <fieldset class="pure-group">
+                    <div class="edit-profile-heading">
+                        <h2>Reģistrācija</h2>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="form-group" show-errors='{showSuccess: true}'>
+                            <label class="control-label">Lietotāja vārds</label>
+                            <input type="text" class="form-control" name="username" ng-model="vm.username" required ng-minlength="5" />
+                            <p class="help-block" ng-if="form.username.$error.required">Lietotāja vārds obligāts</p>
+                            <p class="help-block" ng-if="form.username.$error.minlength">Vismaz 5 simboli</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="form-group" show-errors='{showSuccess: true}'>
+                            <label class="control-label">E-pasts</label>
+                            <input type="email" class="form-control" name="email" ng-model="vm.email" required />
+                            <p class="help-block" ng-show="form.email.$error.required">E-pasts ir obligāts</p>
+                            <p class="help-block" ng-if="form.email.$error.email">E-pasts nederīgs</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="form-group" show-errors='{showSuccess: true}'>
+                            <label class="control-label">Parole</label>
+                            <input type="password" class="form-control" name="password" ng-model="vm.password" required ng-minlength="5" />
+                            <p class="help-block" ng-if="form.password.$error.required">Parole ir obligāta</p>
+                            <p class="help-block" ng-if="form.password.$error.minlength">Vismaz 5 simboli</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="form-group" show-errors='{showSuccess: true}'>
+                            <label class="control-label">Atkārtot paroli</label>
+                            <input type="password" class="form-control" name="confirmPassword" ng-model="vm.confirmPassword" required ng-minlength="5" wj-validation-error="vm.confirmPassword != vm.password ? 'Passwords don\'t match' : ''" />
+                            <p class="help-block" ng-if="form.confirmPassword.$error.required">Parole ir obligāta</p>
+                            <p class="help-block" ng-if="form.confirmPassword.$error.minlength">Vismaz 5 simboli</p>
+                            <p class="help-block" ng-if="form.confirmPassword.$error.wjValidationError">Paroles nesakrīt</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="form-group">
+                            <label>Profila bilde</label>
+                            <input id="file-3" type="file" multiple="false" custom-on-change="uploadFile" />
+                        </div>
+                        <!--<div class="last-form-field">-->
+                            <!--<input type="file" custom-on-change="uploadFile">-->
+                        <!--</div>-->
+                    </div>
+                    <div class="col-md-4 col-md-offset-4">
+                        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-refresh spinning"></i>Reģistrēties</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</main>
+
+<div ng-include="'/resources/partials/footer.html'"></div>

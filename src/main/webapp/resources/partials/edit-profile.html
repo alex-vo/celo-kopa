@@ -1,0 +1,125 @@
+<main ng-controller="EditProfileCtrl">
+    <header class="pure-g" ng-include="'/resources/partials/header.html'"></header>
+    <div class="w-container">
+        <tt-error-messages></tt-error-messages>
+        <tt-success-messages></tt-success-messages>
+        <div class="w-form">
+            <form name="form" ng-submit="edit-profile-form.$valid && editProfile()">
+                <div class="edit-profile-heading">
+                    <h2>Rediģēt profilu</h2>
+                </div>
+
+                <div class="w-row">
+                    <div class="w-col w-col-6" ng-show="vm.registrationType=='PLAIN'">
+                        <p><b>Lietotāja vārds:</b> {{vm.userName}}</p>
+                    </div>
+                    <div class="w-col w-col-6">
+                        <p><b>E-pasts:</b> {{vm.email}}</p>
+                    </div>
+                </div>
+                <!--<div class="w-row">-->
+                    <!--<div class="w-col w-col-6">-->
+                        <!--<div class="form-group" show-errors>-->
+                            <!--<label class="control-label">Parole</label>-->
+                            <!--<input type="password" class="form-control" name="password" ng-model="vm.password" required ng-minlength="5" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" />-->
+                            <!--<p class="help-block" ng-if="form.password.$error.required">Parole ir obligāta</p>-->
+                            <!--<p class="help-block" ng-if="form.password.$error.minlength">Vismaz 5 simboli</p>-->
+                            <!--<p class="help-block" ng-if="form.password.$error.pattern">Vismaz viens cipars un viens lielais burts</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="w-col w-col-6">-->
+                        <!--<div class="form-group" show-errors>-->
+                            <!--<label class="control-label">Atkārtot paroli</label>-->
+                            <!--<input type="password" class="form-control" name="confirmPassword" ng-model="vm.confirmPassword" required ng-minlength="5" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" wj-validation-error="vm.confirmPassword != vm.password ? 'Passwords don\'t match' : ''" />-->
+                            <!--<p class="help-block" ng-if="form.confirmPassword.$error.required">Parole ir obligāta</p>-->
+                            <!--<p class="help-block" ng-if="form.confirmPassword.$error.minlength">Vismaz 5 simboli</p>-->
+                            <!--<p class="help-block" ng-if="form.confirmPassword.$error.pattern">Vismaz viens cipars un viens lielais burts</p>-->
+                            <!--<p class="help-block" ng-if="form.confirmPassword.$error.wjValidationError">Paroles nesakrīt</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="w-row">
+                    <div class="w-col w-col-6">
+                        <div class="form-group" show-errors>
+                            <label class="control-label">Vārds</label>
+                            <input type="text" class="form-control" name="name" ng-model="vm.name"
+                                   ng-disabled="vm.registrationType=='FACEBOOK'" required />
+                            <p class="help-block" ng-if="form.name.$error.required">Vārds ir obligāts</p>
+                        </div>
+                    </div>
+                    <div class="w-col w-col-6">
+                        <div class="form-group" show-errors>
+                            <label class="control-label">Uzvārds</label>
+                            <input type="text" class="form-control" name="surname" ng-model="vm.surname"
+                                   ng-disabled="vm.registrationType=='FACEBOOK'" required />
+                            <p class="help-block" ng-if="form.surname.$error.required">Uzvārds ir obligāts</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-row">
+                    <div class="w-col w-col-6">
+                        <label for="day" class="control-label ">Dzimšanas diena</label>
+                        <div class="form-group" show-errors>
+                            <table class="birthday-input-table">
+                                <tr>
+                                    <td>
+                                        <select id="day" name="day"
+                                                ng-model="vm.day"
+                                                ng-options="day for day in days" class="form-control" required></select>
+                                    </td>
+                                    <td>
+                                        <select id="month" name="month"
+                                                ng-model="vm.month"
+                                                ng-options="month.value as month.text for month in months" class="form-control" required></select>
+                                    </td>
+                                    <td>
+                                        <select id="year" name="year"
+                                                ng-model="vm.year"
+                                                ng-options="year for year in years" class="form-control" required></select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-row">
+                    <div class="w-col w-col-12">
+                        <div class="form-group">
+                            <label for="aboutMe" class="control-label ">Par mani</label>
+                            <textarea id="aboutMe" ng-model="vm.aboutMe" name="aboutMe" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="Piemērs: Es bieži braucu no Rīgas us Cēsīm un atpakaļ."></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-row">
+                    <div class="w-col w-col-6">
+                        <div class="form-group">
+                            <label for="car" class="control-label">Mašīna</label>
+                            <input id="car" name="car" type="text" class="form-control" placeholder="Piemērs: Audi A6" ng-model="vm.car" required>
+                            <p class="help-block" ng-if="form.car.$error.required">Ievadiet auto</p>
+                        </div>
+                    </div>
+                    <div class="w-col w-col-6">
+                        <div class="form-group">
+                            <label for="carRegNumber" class="control-label ">Auto reģ. numurs</label>
+                            <input id="carRegNumber" type="text" class="form-control" ng-model="vm.carRegNumber" name="carRegNumber" placeholder="Piemērs: AB-1234" required>
+                            <p class="help-block" ng-if="form.carRegNumber.$error.required">Ievadiet auto reģistrācijas numuru</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-row">
+                    <div class="w-col w-col-12">
+                        <button type="submit" ng-click="form.$setSubmitted();" class="btn btn-primary"><i class="glyphicon glyphicon-refresh spinning"></i>Saglabāt</button>
+                        <button type="button" class="btn" ng-click="cancel()">Atcelt</button>
+                    </div>
+                </div>
+            </form>
+            <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+            </div>
+            <div class="w-form-fail">
+                <div>Oops! Something went wrong while submitting the form</div>
+            </div>
+        </div>
+    </div>
+</main>
+<div ng-include="'/resources/partials/footer.html'"></div>

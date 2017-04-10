@@ -1,0 +1,102 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=141663539258234";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<main ng-controller="ViewRideCtrl">
+    <header class="pure-g" ng-include="'/resources/partials/header.html'"></header>
+    <div class="w-container">
+        <tt-error-messages></tt-error-messages>
+        <tt-success-messages></tt-success-messages>
+        <div class="w-row">
+            <div class="w-col w-col-6">
+                <div class="profile-image-container">
+                    <img class="profile-image" no-cache-src="{{ride.user.profileImage ? ride.user.profileImage : '/resources/static/no-avatar.png'}}" />
+                </div>
+            </div>
+            <div class="w-col w-col-6 personal-data-container">
+                <div class="w-row">
+                    <div class="w-col w-col-12">
+                        <h2>Vadītājs</h2>
+                    </div>
+                    <div class="w-col w-col-12">
+                        <b>Lietotāja vārds:</b> {{ride.user.userName}}
+                    </div>
+                    <div class="w-col w-col-12">
+                        <b>Vārds:</b> {{ride.user.name}} {{ride.user.surname}}
+                    </div>
+                    <div class="w-col w-col-12">
+                        <b>Dzimšanas diena:</b> {{ride.user.birthday}}
+                    </div>
+                    <div class="w-col w-col-12">
+                        <b>E-pasts:</b> {{ride.user.email}}
+                    </div>
+                    <div class="w-col w-col-12" ng-show="ride.user.car">
+                        <b>Auto:</b> {{ride.user.car}}, {{ride.user.carRegNumber}}
+                    </div>
+                    <div class="w-col w-col-4" ng-show="ride.user.car">
+                        <button class="btn btn-facebook btn-lg" ng-click="shareFacebook();"><i class="fa fa-facebook fa-2"></i>Поделиться</button>
+                    </div>
+                    <div class="w-col w-col-4" ng-show="ride.user.car">
+                        <button class="btn btn-draugiem btn-lg" ng-click="shareDraugiem();"><i class="fa fa-draugiem fa-2"></i>Ieteikt</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-row">
+            <div class="center-text large-font">
+                Brauciens
+            </div>
+        </div>
+        <div class="ride-data-container">
+            <div class="w-row">
+                <div class="w-col w-col-12">
+                    <b>Virsraksts:</b> {{ride.title}}
+                </div>
+            </div>
+            <div class="w-row">
+                <div class="w-col w-col-12">
+                    <b>No:</b> {{ride.driveFrom}}, {{ride.fromAddress}}
+                </div>
+            </div>
+            <div class="w-row">
+                <div class="w-col w-col-12">
+                    <b>Uz:</b> {{ride.driveTo}}, {{ride.toAddress}}
+                </div>
+            </div>
+            <div class="w-row">
+                <div class="w-col w-col-6">
+                    <b>Izbraukšana:</b> {{ride.departureTime}}
+                </div>
+                <div class="w-col w-col-6">
+                    <b>Atbraukšana:</b> {{ride.arrivalTime}}
+                </div>
+            </div>
+            <div class="w-row">
+                <div class="w-col w-col-12">
+                    <b>Komentārs:</b> {{ride.text}}
+                </div>
+            </div>
+            <div class="w-row">
+                <div class="w-col w-col-6">
+                    <b>Cena:</b> {{ride.price}}€
+                </div>
+                <div class="w-col w-col-6">
+                    <b>Auto reģ. numurs:</b> {{ride.carRegNumber}}
+                </div>
+            </div>
+            <div class="w-row">
+                <div class="w-col w-col-6">
+                    <b>Brīvas vietas:</b> {{ride.placesLeft}}
+                </div>
+                <div class="w-col w-col-6">
+                    <b>Vietas vispār:</b> {{ride.placesOverall}}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div ng-include="'/resources/partials/footer.html'"></div>

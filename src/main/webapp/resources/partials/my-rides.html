@@ -1,0 +1,72 @@
+<main ng-controller="MyRidesCtrl">
+    <header class="pure-g" ng-include="'/resources/partials/header.html'"></header>
+    <div class="w-container">
+        <tt-error-messages></tt-error-messages>
+        <tt-success-messages></tt-success-messages>
+        <div class="alert alert-info" role="alert" ng-hide="vm.myRides.length > 0">
+            Uz doto brīdi piedāvāto braucienu nav.
+        </div>
+        <div class="table-container" ng-show="vm.myRides.length > 0">
+            <table class="tablesaw" data-tablesaw-mode="stack" tablesawrender>
+                <thead>
+                    <tr>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col>Virsraksts</th>
+                        <th scope="col" data-tablesaw-sortable-col>No</th>
+                        <th scope="col" data-tablesaw-sortable-col>Uz</th>
+                        <th scope="col" data-tablesaw-sortable-col>Izbraukšana</th>
+                        <th scope="col" data-tablesaw-sortable-col>Atbraukšana</th>
+                        <th scope="col" data-tablesaw-sortable-col>Komentārs</th>
+                        <th scope="col" data-tablesaw-sortable-col>Cena</th>
+                        <th scope="col" data-tablesaw-sortable-col>Auto reģ. numurs</th>
+                        <th scope="col" data-tablesaw-sortable-col>Brīvas vietas</th>
+                        <th scope="col" data-tablesaw-sortable-col>Vietas vispār</th>
+                        <th scope="col" data-tablesaw-sortable-col></th>
+                        <th scope="col" data-tablesaw-sortable-col></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ride in vm.myRides">
+                        <td>
+                            {{ride.title}}
+                        </td>
+                        <td>
+                            {{ride.driveFrom}}{{ride.fromAddress ? "," : ""}} {{ride.fromAddress}}
+                        </td>
+                        <td>
+                            {{ride.driveTo}}{{ride.toAddress ? "," : ""}} {{ride.toAddress}}
+                        </td>
+                        <td>
+                            {{ride.departureTime}}
+                        </td>
+                        <td>
+                            {{ride.arrivalTime}}
+                        </td>
+                        <td>
+                            {{ride.text}}
+                        </td>
+                        <td>
+                            {{ride.price}}
+                        </td>
+                        <td>
+                            {{ride.carRegNumber}}
+                        </td>
+                        <td>
+                            {{ride.placesLeft}}
+                        </td>
+                        <td>
+                            {{ride.placesOverall}}
+                        </td>
+                        <td>
+                            <a href="/edit-ride/{{ride.id}}">Rediģēt</a>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" ng-click="open(ride.id)">Dzēst</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a href="/add-ride">Piedāvāt jaunu braucienu</a>
+    </div>
+</main>
+<div ng-include="'/resources/partials/footer.html'"></div>

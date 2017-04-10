@@ -1,0 +1,143 @@
+<main ng-controller="DriveCtrl">
+    <header class="pure-g" ng-include="'/resources/partials/header.html'"></header>
+    <div class="w-container">
+        <tt-error-messages></tt-error-messages>
+        <tt-success-messages></tt-success-messages>
+        <div class="w-form">
+            <form novalidate id="add-drive-form" name="form" class="pure-form login-form" role="form" ng-submit="addDrive()" autocomplete="off">
+                <fieldset class="pure-group">
+                    <div class="edit-profile-heading">
+                        <h2>Piedāvāt braucienu</h2>
+                    </div>
+                    <div class="w-row">
+                        <div class="w-col w-col-12">
+                            <div class="form-group" show-errors>
+                                <label class="control-label">Virsraksts</label>
+                                <input id="title" type="text" ng-model="ride.title" name="title" class="form-control" placeholder="Piemērs: Brauciens no Rīgas uz Daugavpili" required/>
+                                <p class="help-block" ng-if="form.title.$error.required">Ievadiet virsrakstu</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-row">
+                        <div class="w-col w-col-6">
+                            <div class="form-group" show-errors>
+                                <label class="control-label">No</label>
+                                <input name="driveFrom" type="text" id="driveFrom" class="form-control" placeholder="Пример: Rīga" ng-model="ride.driveFrom"
+                                       uib-typeahead="address for address in getLocation($viewValue)" typeahead-editable='false' required>
+                                <p class="help-block" ng-if="form.driveFrom.$error.required">Ievadiet eksistējošo vietu</p>
+                            </div>
+                        </div>
+                        <div class="w-col w-col-6">
+                            <div class="form-group">
+                                <label for="fromAddress" class="control-label">Adrese</label>
+                                <input id="fromAddress" type="text" ng-focus="focus('fromAddress')" ng-blur="blur('fromAddress')" ng-model="ride.fromAddress"
+                                       name="fromAddress" class="form-control" placeholder="Example: Dzelzavas iela 28">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-row">
+                        <div class="w-col w-col-6">
+                            <div class="form-group" show-errors>
+                                <label for="driveTo" class="control-label">Uz</label>
+                                <input name="driveTo" type="text" id="driveTo" class="form-control" placeholder="Пример: Daugavpils" ng-model="ride.driveTo"
+                                       uib-typeahead="address for address in getLocation($viewValue)" typeahead-editable='false' required>
+                                <p class="help-block" ng-if="form.driveTo.$error.required">Ievadiet eksistējošo vietu</p>
+                            </div>
+                        </div>
+                        <div class="w-col w-col-6">
+                            <div class="form-group">
+                                <label for="toAddress" class="control-label">Adrese</label>
+                                <input id="toAddress" type="text" ng-model="ride.toAddress" name="toAddress" class="form-control" placeholder="Piemērs: Smilšu iela 14">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-row">
+                        <div class="w-col w-col-6">
+                            <div class="form-group" show-errors>
+                                <label for="departureDate" class="control-label ">Izbraukšana</label>
+                                <div class='input-group date' id='departureDateDiv'>
+                                    <input id="departureDate" name="departureDateString" type='text' class="form-control" ng-model="ride.departureDateString" required />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                <p class="help-block" ng-if="form.departureDateString.$error.required">Datums obligāts</p>
+                            </div>
+                        </div>
+                        <div class="w-col w-col-6">
+                            <label for="departureTime" class="control-label "></label>
+                            <div uib-timepicker id="departureTime" ng-model="ride.departureTime" hour-step="1" minute-step="15" show-meridian="false" place></div>
+                        </div>
+                    </div>
+                    <div class="w-row">
+                        <div class="w-col w-col-6">
+                            <div class="form-group" show-errors>
+                                <label for="arrivalDate" class="control-label ">Atbraukšana</label>
+                                <div class='input-group date' id='arrivalDateDiv'>
+                                    <input id="arrivalDate" name="arrivalDateString" type='text' class="form-control" ng-model="ride.arrivalDateString" required />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                </div>
+                                <p class="help-block" ng-if="form.arrivalDateString.$error.required">Datums obligāts</p>
+                            </div>
+                        </div>
+                        <div class="w-col w-col-6">
+                            <label for="arrivalTime" class="control-label "></label>
+                            <div uib-timepicker id="arrivalTime" ng-model="ride.arrivalTime" hour-step="1" minute-step="15" show-meridian="false" place></div>
+                        </div>
+                    </div>
+                    <div class="w-row">
+                        <div class="w-col w-col-12">
+                            <label for="comments" class="control-label ">Komentārs</label>
+                            <div class="form-group">
+                                    <textarea id="comments" ng-focus="focus('text')" ng-blur="blur('text')" ng-model="ride.text"
+                                              name="text" class="form-control" placeholder="Piemērs: Mašīnā nedrīkst smēķēt."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-row">
+                        <div class="w-col w-col-6">
+                            <div class="form-group" show-errors>
+                                <label for="price" class="control-label">Cena</label>
+                                <div class='input-group'>
+                                    <input id="price" type="number" ng-model="ride.price" name="price" class="form-control" placeholder="Piemērs: 10" required />
+                                    <span class="input-group-addon" id="price-span">€</span>
+                                </div>
+                                <p class="help-block" ng-if="form.price.$error.required">Ievadiet cenu</p>
+                            </div>
+                        </div>
+                        <div class="w-col w-col-6">
+                            <div class="form-group" show-errors>
+                                <label for="carRegNumber" class="control-label ">Auto reģ. numurs</label>
+                                <input id="carRegNumber" type="text" ng-model="ride.carRegNumber" name="carRegNumber" class="form-control" placeholder="Piemērs: AB-1234" required />
+                                <p class="help-block" ng-if="form.carRegNumber.$error.required">Ievadiet reģistrācijas numuru</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-row">
+                        <div class="w-col w-col-6">
+                            <div class="form-group">
+                                <label for="placesLeft" class="control-label ">Brīvas vietas</label>
+                                <input id="placesLeft" type="number" ng-model="ride.placesLeft" name="placesLeft" class="form-control" placeholder="Piemērs: 3" />
+                            </div>
+                        </div>
+                        <div class="w-col w-col-6">
+                            <div class="form-group">
+                                <label for="placesOverall" class="control-label">Vietas vispār</label>
+                                <input id="placesOverall" type="number" ng-model="ride.placesOverall" name="placesOverall" class="form-control" placeholder="Piemērs: 4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-row">
+                        <div class="w-col w-col-12">
+                            <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-refresh spinning"></i>Saglabāt</button>
+                            <button type="button" class="btn" ng-click="cancel()">Atcelt</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>
+<div ng-include="'/resources/partials/footer.html'"></div>

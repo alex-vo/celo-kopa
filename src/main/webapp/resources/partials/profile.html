@@ -1,0 +1,86 @@
+<main ng-controller="MyProfileCtrl">
+    <header class="pure-g" ng-include="'/resources/partials/header.html'"></header>
+    <div class="w-container">
+        <tt-error-messages></tt-error-messages>
+        <tt-success-messages></tt-success-messages>
+        <div class="w-row">
+            <div class="w-col w-col-6">
+                <div class="profile-image-container">
+                    <img class="profile-image" no-cache-src="{{user.profileImage}}" ng-if="user.registrationType=='PLAIN'" />
+                    <img class="profile-image" src="{{user.profileImage}}" ng-if="user.registrationType=='FACEBOOK'" />
+                </div>
+                <div class="w-col w-col-4 col-md-offset-2">
+                    <label class="btn btn-block btn-primary">
+                        Mainīt profila bildi&hellip; <input type="file" custom-on-change="uploadFile" style="display: none;">
+                    </label>
+                </div>
+                <div class="w-col w-col-3 col-md-offset-1">
+                    <button class="btn btn-default" ng-click="removePicture();">Dzēst bildi</button>
+                </div>
+            </div>
+            <div class="w-col w-col-6 personal-data-container">
+                <div class="w-row">
+                    <div class="w-col w-col-12">
+                        <h2>Mans profils</h2>
+                    </div>
+                    <div class="w-col w-col-12" ng-show="user.registrationType=='PLAIN'">
+                        <b>Lietotāja vārds:</b> {{user.userName}}
+                    </div>
+                    <div class="w-col w-col-12">
+                        <b>Vārds:</b> {{user.name}} {{user.surname}}
+                    </div>
+                    <div class="w-col w-col-12" ng-show="user.birthday">
+                        <b>Dzimšanas diena:</b> {{user.birthday}}
+                    </div>
+                    <div class="w-col w-col-12">
+                        <b>E-pasts:</b> {{user.email}}
+                    </div>
+                    <div class="w-col w-col-12" ng-show="user.car">
+                        <b>Auto:</b> {{user.car}}, {{user.carRegNumber}}
+                    </div>
+                    <div class="w-col w-col-2">
+                        <form action="/edit-profile">
+                            <button type="submit" class="btn btn-primary">Rediģēt</button>
+                        </form>
+                    </div>
+                    <div class="w-col w-col-3" ng-show="user.registrationType=='PLAIN'">
+                        <form action="/change-password">
+                            <button type="submit" class="btn btn-primary">Mainīt paroli</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-row">
+            <div class="center-text large-font">
+                Mani piedāvātie braucieni
+            </div>
+        </div>
+        <div class="w-row">
+            <div class="col-sm-12">
+                <div class="alert alert-info" role="alert" ng-hide="myRides.length > 0">
+                    Uz doto brīdi piedāvāto braucienu nav.
+                </div>
+                <table id="example" class="my-rides table-striped" data-tablesaw-mode="stack" ng-show="myRides.length > 0">
+                    <thead>
+                    <tr>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Datums</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3">No</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Uz</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="ride in myRides">
+                        <td class="title">
+                            {{ride.departureTime}}
+                        </td>
+                        <td>{{ride.driveFrom}}, {{ride.fromAddress}}</td>
+                        <td>{{ride.driveTo}}, {{ride.toAddress}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<div ng-include="'/resources/partials/footer.html'"></div>

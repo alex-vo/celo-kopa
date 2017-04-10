@@ -1,0 +1,39 @@
+<nav class="navbar navbar-default" role="navigation">
+    <div class="menu-container w-container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <img class="logo" src="/resources/img/logo1.png" />
+            </a>
+            <div class="btn-group dropdown">
+                <button type="button" class="language-button btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="lang-sm" lang="lv" ng-show="getLang() == 'lv_LV'"></span></span>
+                    <span class="lang-sm" lang="ru" ng-show="getLang() == 'ru_RU'"></span></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><span class="lang-sm" lang="lv" ng-hide="getLang() == 'lv_LV'" ng-click="setLang('lv_LV')"></span></li>
+                    <li><span class="lang-sm" lang="ru" ng-hide="getLang() == 'ru_RU'" ng-click="setLang('ru_RU')"></span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li style="text-align: center;" ng-show="isLoggedIn()">
+                    <!--<form id="go-home" action="/add-ride">-->
+                        <button ng-click="goToAddRide()" class="btn btn-primary offer-ride-button">Предложить поездку</button>
+                    <!--</form>-->
+                </li>
+                <li style="text-align: center;" ng-show="isLoggedIn()"><a href="/my-rides">Мои поездки</a></li>
+                <li style="text-align: center;" ng-show="isLoggedIn()"><a href="/">Искать</a></li>
+                <li style="text-align: center;" ng-show="isLoggedIn()"><a href="/profile">Профиль</a></li>
+                <li style="text-align: center;" ng-show="isLoggedIn()"><a href="#" ng-click="logout()">Выйти</a></li>
+                <li style="text-align: center;" ng-hide="isLoggedIn()"><a href="/login">Войти</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

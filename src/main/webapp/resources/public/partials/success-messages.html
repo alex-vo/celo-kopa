@@ -1,0 +1,10 @@
+<!--<div class="form-messages success {{extraStyles}}" ng-show="vm.successMessages.length > 0" ng-cloak>-->
+    <!--<img class="error-icon" src="/resources/img/info-icon.png">-->
+
+    <!--<div class="messages-group">-->
+        <!--<div ng-repeat="message in vm.successMessages">{{message.description}}</div>-->
+    <!--</div>-->
+<!--</div>-->
+<div class="alert alert-success" role="alert" ng-show="vm.successMessages.length > 0" ng-cloak>
+    <div ng-repeat="message in vm.successMessages">{{message.description}}</div>
+</div>

@@ -1,0 +1,32 @@
+{
+    "name": "celo-kopa",
+    "version": "1.0",
+    "authors": [
+        "leha@celokopa.lv"
+    ],
+    "description": "Ceļo kopā",
+    "dependencies": {
+        "angular": "1.5.5",
+        "angular-messages": "1.5.5",
+        "lodash": "2.4.1",
+        "pure": "0.5.0",
+        "requirejs": "2.1.15",
+        "spring-security-csrf-token-interceptor": "0.1.5",
+        "angular-bootstrap": "2.0.0",
+        "angular-animate": "1.5.5",
+        "angular-cookies": "1.5.5",
+        "bootstrap": "3.3.6",
+        "eonasdan-bootstrap-datetimepicker": "4.0.0",
+        "bootstrap-validator": "0.11.5",
+        "angular-route": "1.5.5",
+        "ng-dialog": "0.6.2",
+        "bootstrap-fileinput": "4.3.5",
+        "tablesaw": "2.0.3",
+        "angular-translate": "2.13.0",
+        "bootstrap-language": "master",
+        "angular-translate-loader-static-files": "2.13.0",
+        "typeahead.js": "v0.11.1",
+        "bootstrap-datepicker-mobile": "0.0.1",
+        "components-font-awesome": "4.7.0"
+    }
+}
