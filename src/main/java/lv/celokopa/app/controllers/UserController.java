@@ -33,12 +33,14 @@ public class UserController {
 
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public UserInfoDTO getUserInfo(Principal principal) {
 
         User user = userService.findUserByUsername(principal.getName());
 
-        return user != null ? UserInfoDTO.mapFromUserEntity(user) : null;
+        UserInfoDTO dto = UserInfoDTO.mapFromUserEntity(user);
+        System.out.println(dto);
+        return user != null ? dto : null;
     }
 
 

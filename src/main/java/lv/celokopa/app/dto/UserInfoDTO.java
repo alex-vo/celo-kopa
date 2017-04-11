@@ -3,8 +3,9 @@ package lv.celokopa.app.dto;
 import lv.celokopa.app.model.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import com.mysql.jdbc.StringUtils;
 import java.util.Date;
+import org.apache.commons.lang3.StringUtils;
+
 
 /**
  *
@@ -47,6 +48,14 @@ public class UserInfoDTO {
 
 
     public static UserInfoDTO mapFromUserEntity(User user) {
+        RegistrationType registrationType;
+        if(StringUtils.isNotEmpty(user.getFacebookToken())){
+            registrationType = RegistrationType.FACEBOOK;
+        }else if(StringUtils.isNotEmpty(user.getDraugiemToken())){
+            registrationType = RegistrationType.DRAUGIEM;
+        }else {
+            registrationType = RegistrationType.PLAIN;
+        }
         return new UserInfoDTO(user.getUsername(),
                                user.getName(),
                                user.getSurname(),
@@ -57,7 +66,7 @@ public class UserInfoDTO {
                                user.getCarRegNumber(),
                                user.getProfileImage(),
                                user.getPreferredLanguage(),
-                               StringUtils.isNullOrEmpty(user.getFacebookToken()) ? RegistrationType.PLAIN : RegistrationType.FACEBOOK);
+                               registrationType);
     }
 
     public String getName() {

@@ -73,23 +73,26 @@ public class DraugiemAuthorizer {
 
     private UserInfoDTO getBasicInfo(JsonObject jsonObject)
             throws ParseException {
-        JsonObject userObject = jsonObject.get("users").getAsJsonArray().get(0).getAsJsonObject();
+        JsonObject userObject = jsonObject.get("users")
+                                          .getAsJsonObject()
+                                          .get(jsonObject.get("uid").getAsString())
+                                          .getAsJsonObject();
 
         List<Locale> localeList = LocaleUtils.languagesByCountry(jsonObject.get("language").getAsString());
         String language = localeList.isEmpty() ? "lv_LV" : localeList.get(0).toString();
 
-        return new UserInfoDTO(userObject.get("uid").getAsString(),
-                                          userObject.get("name").getAsString(),
-                                          userObject.get("surname").getAsString(),
-                                          userObject.get("emailHash").getAsString(),
-                                          new SimpleDateFormat("yyyy-MM-dd").parse(userObject.get("birthday")
-                                                                                             .getAsString()),
-                                          null,
-                                          null,
-                                          null,
-                                          userObject.get("img").getAsString(),
-                                          language,
-                                          RegistrationType.DRAUGIEM);
+        return new UserInfoDTO(
+                userObject.get("uid").getAsString(),
+                userObject.get("name").getAsString(),
+                userObject.get("surname").getAsString(),
+                userObject.get("emailHash").getAsString(),
+                new SimpleDateFormat("yyyy-MM-dd Z").parse(userObject.get("birthday").getAsString() + " UTC"),
+                null,
+                null,
+                null,
+                userObject.get("imgl").getAsString(),
+                language,
+                RegistrationType.DRAUGIEM);
     }
 
 }

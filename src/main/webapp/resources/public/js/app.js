@@ -667,7 +667,9 @@ sampleApp.controller('EditProfileCtrl', ['$scope', 'UserService', '$controller',
 
         initDates();
 
+        //todo: don't call user endpoint
         UserService.getUserData().then(function(userData){
+            console.log(userData);
             $scope.vm = userData;
             if($scope.vm.birthday){
                 $scope.vm.day = parseInt($scope.vm.birthday.split(".")[0]);
