@@ -10,6 +10,7 @@ import lv.celokopa.app.util.FileHelper;
 import lv.celokopa.app.util.RandomStringGenerator;
 import java.util.Date;
 import java.util.regex.Pattern;
+import lv.celokopa.app.validator.UserValidator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,12 +115,16 @@ public class UserService {
 //    }
 
     @Transactional
-    public void updateUser(String username, UserInfoDTO userInfoDTO){
+    public void updatePlainUser(String username, UserInfoDTO userInfoDTO){
         User user = this.findUserByUsername(username);
-        user.setName(userInfoDTO.getName());
-        user.setSurname(userInfoDTO.getSurname());
-        user.setName(userInfoDTO.getName());
-        user.setBirthday(userInfoDTO.getBirthday());
+        if(StringUtils.isEmpty(user.getFacebookToken()) && StringUtils.isEmpty(user.getDraugiemToken())) {
+            user.setName(userInfoDTO.getName());
+            user.setSurname(userInfoDTO.getSurname());
+        }
+
+        if(StringUtils.isEmpty(user.getDraugiemToken())) {
+            user.setBirthday(userInfoDTO.getBirthday());
+        }
         user.setAboutMe(userInfoDTO.getAboutMe());
         user.setCar(userInfoDTO.getCar());
         user.setCarRegNumber(userInfoDTO.getCarRegNumber());
@@ -160,7 +165,9 @@ public class UserService {
         }else if(StringUtils.isEmpty(user.getFacebookToken())){
             throw new Exception("This is not a Facebook user.");
         }else {
-            //TODO: update rest of the info
+            user.setName(dto.getName());
+            user.setSurname(dto.getSurname());
+            user.setProfileImage(dto.getProfileImage());
             user.setFacebookToken(facebookToken);
         }
         userRepository.save(user);
@@ -177,7 +184,10 @@ public class UserService {
         }else if(StringUtils.isEmpty(user.getDraugiemToken())){
             throw new Exception("This is not a Draugiem.lv user.");
         }else {
-            //TODO: update rest of the info
+            user.setName(dto.getName());
+            user.setSurname(dto.getSurname());
+            user.setBirthday(dto.getBirthday());
+            user.setProfileImage(dto.getProfileImage());
             user.setDraugiemToken(draugiemToken);
         }
         userRepository.save(user);
@@ -229,6 +239,9 @@ public class UserService {
     @Transactional
     public void changePassword(String name, String oldPassword, String newPassword) {
         User user = userRepository.findUserByUsername(name);
+
+        UserValidator.validatePasswordChange(user);
+
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         if(user != null && encoder.matches(oldPassword, user.getPasswordDigest())) {
             user.setPasswordDigest(new BCryptPasswordEncoder().encode(newPassword));

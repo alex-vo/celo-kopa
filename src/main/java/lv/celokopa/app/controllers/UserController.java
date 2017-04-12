@@ -62,7 +62,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.PUT)
     public void updateUser(Principal principal, @RequestBody UserInfoDTO user) {
         //todo check social networks
-        userService.updateUser(principal.getName(), user);
+        userService.updatePlainUser(principal.getName(), user);
     }
 
     @ResponseStatus(HttpStatus.OK)
