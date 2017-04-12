@@ -48,6 +48,9 @@ public class TestConfiguration extends WebMvcConfigurerAdapter {
     @Value("${facebook.client.secret}")
     String facebookClientSecret;
 
+    @Value("${draugiem.app.key}")
+    String draugiemAppKey;
+
     @Bean(initMethod = "init")
     public TestDataInitializer initTestData() {
         return new TestDataInitializer();
@@ -112,6 +115,11 @@ public class TestConfiguration extends WebMvcConfigurerAdapter {
     @Bean(name = "facebookClientSecret")
     public String facebookClientSecret(){
         return facebookClientSecret;
+    }
+
+    @Bean(name = "draugiemAppKey")
+    public String draugiemAppKey(){
+        return draugiemAppKey;
     }
 
 }

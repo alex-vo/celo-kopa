@@ -70,6 +70,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.POST, "/api/password/restore").permitAll()
             .antMatchers(HttpMethod.GET, "/api/autocomplete").permitAll()
             .antMatchers(HttpMethod.GET, "/facebookCallback").permitAll()
+            .antMatchers(HttpMethod.GET, "/draugiemCallback").permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin()

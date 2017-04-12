@@ -33,12 +33,14 @@ public class UserController {
 
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public UserInfoDTO getUserInfo(Principal principal) {
 
         User user = userService.findUserByUsername(principal.getName());
 
-        return user != null ? UserInfoDTO.mapFromUserEntity(user) : null;
+        UserInfoDTO dto = UserInfoDTO.mapFromUserEntity(user);
+        System.out.println(dto);
+        return user != null ? dto : null;
     }
 
 
@@ -60,7 +62,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.PUT)
     public void updateUser(Principal principal, @RequestBody UserInfoDTO user) {
         //todo check social networks
-        userService.updateUser(principal.getName(), user);
+        userService.updatePlainUser(principal.getName(), user);
     }
 
     @ResponseStatus(HttpStatus.OK)

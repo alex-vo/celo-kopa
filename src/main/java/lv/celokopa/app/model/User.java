@@ -44,6 +44,7 @@ public class User extends AbstractEntity {
     private String preferredLanguage;
     private String facebookToken;
     private Date facebookTokenExpires;
+    private String draugiemToken;
 
     public User() {
 
@@ -51,7 +52,7 @@ public class User extends AbstractEntity {
 
     public User(String username, String name, String surname, Date birthday, String aboutMe, String car, String carRegNumber,
                 String passwordDigest, String email, Boolean isActive, String activationCode, String image,
-                String language, String facebookToken, Date facebookTokenExpires) {
+                String language, String facebookToken, Date facebookTokenExpires, String draugiemToken) {
         this.username = username;
         this.name = name;
         this.surname = surname;
@@ -67,6 +68,7 @@ public class User extends AbstractEntity {
         this.preferredLanguage = language;
         this.facebookToken = facebookToken;
         this.facebookTokenExpires = facebookTokenExpires;
+        this.draugiemToken = draugiemToken;
     }
 
     public String getUsername() {
@@ -196,6 +198,16 @@ public class User extends AbstractEntity {
 
     public void setFacebookTokenExpires(Date facebookTokenExpires) {
         this.facebookTokenExpires = facebookTokenExpires;
+    }
+
+
+    public String getDraugiemToken() {
+        return draugiemToken;
+    }
+
+
+    public void setDraugiemToken(String draugiemToken) {
+        this.draugiemToken = draugiemToken;
     }
 
 

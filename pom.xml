@@ -186,6 +186,13 @@
             <version>2.8.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -220,9 +227,9 @@
                 <configuration>
                     <contextFile>${basedir}/src/main/resources/context.xml</contextFile>
                     <path>/</path>
-                    <httpsPort>8443</httpsPort>
-                    <keystoreFile>${basedir}/other/keystore.jks</keystoreFile>
-                    <keystorePass>secret</keystorePass>
+                    <!--<httpsPort>8443</httpsPort>-->
+                    <!--<keystoreFile>${basedir}/other/keystore.jks</keystoreFile>-->
+                    <!--<keystorePass>secret</keystorePass>-->
                 </configuration>
             </plugin>
         </plugins>

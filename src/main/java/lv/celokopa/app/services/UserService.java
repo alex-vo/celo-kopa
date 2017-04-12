@@ -10,6 +10,7 @@ import lv.celokopa.app.util.FileHelper;
 import lv.celokopa.app.util.RandomStringGenerator;
 import java.util.Date;
 import java.util.regex.Pattern;
+import lv.celokopa.app.validator.UserValidator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,31 +79,33 @@ public class UserService {
         }
 
         String activationCode = RandomStringGenerator.getRandomString(128);
-        User user = new User(newUserDTO.getUsername(),
-                             null,
-                             null,
-                             null,
-                             null,
-                             null,
-                             null,
-                             new BCryptPasswordEncoder().encode(newUserDTO.getPlainTextPassword()),
-                             newUserDTO.getEmail(),
-                             false,
-                             activationCode,
-                             "/resources/static" + profilePictureName,
-                             newUserDTO.getPreferedLanguage(),
-                             null,
-                             null);
+        User user = new User(
+                newUserDTO.getUsername(),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                new BCryptPasswordEncoder().encode(newUserDTO.getPlainTextPassword()),
+                newUserDTO.getEmail(),
+                false,
+                activationCode,
+                "/resources/static" + profilePictureName,
+                newUserDTO.getPreferedLanguage(),
+                null,
+                null,
+                null);
 
         userRepository.save(user);
 
-        EmailSender.getInstance()
-                   .sendEmail("Aktivizējiet savu CeļoKopā.lv profilu",
-                              "Lai aktivizētu jūsu profilu, " + "lūdzu uzspiediet uz hipersaiti: http://" + currentHost + "/api/activate?username=" + user
-                                      .getUsername() + "&code=" + activationCode,
-                              user.getEmail(),
-                              username,
-                              password);
+        EmailSender.getInstance().sendEmail(
+                "Aktivizējiet savu CeļoKopā.lv profilu",
+                "Lai aktivizētu jūsu profilu, " + "lūdzu uzspiediet uz hipersaiti: http://" + currentHost + "/api/activate?username=" + user
+                        .getUsername() + "&code=" + activationCode,
+                user.getEmail(),
+                username,
+                password);
     }
 
 
@@ -112,12 +115,16 @@ public class UserService {
 //    }
 
     @Transactional
-    public void updateUser(String username, UserInfoDTO userInfoDTO){
+    public void updatePlainUser(String username, UserInfoDTO userInfoDTO){
         User user = this.findUserByUsername(username);
-        user.setName(userInfoDTO.getName());
-        user.setSurname(userInfoDTO.getSurname());
-        user.setName(userInfoDTO.getName());
-        user.setBirthday(userInfoDTO.getBirthday());
+        if(StringUtils.isEmpty(user.getFacebookToken()) && StringUtils.isEmpty(user.getDraugiemToken())) {
+            user.setName(userInfoDTO.getName());
+            user.setSurname(userInfoDTO.getSurname());
+        }
+
+        if(StringUtils.isEmpty(user.getDraugiemToken())) {
+            user.setBirthday(userInfoDTO.getBirthday());
+        }
         user.setAboutMe(userInfoDTO.getAboutMe());
         user.setCar(userInfoDTO.getCar());
         user.setCarRegNumber(userInfoDTO.getCarRegNumber());
@@ -154,11 +161,34 @@ public class UserService {
         if(user == null){
             user = new User(dto.getUserName(), dto.getName(), dto.getSurname(), dto.getBirthday(), dto.getAboutMe(),
                             dto.getCar(), dto.getCarRegNumber(), null, dto.getEmail(), true, null,
-                            dto.getProfileImage(), dto.getPreferredLanguage(), facebookToken, tokenExpires);
+                            dto.getProfileImage(), dto.getPreferredLanguage(), facebookToken, tokenExpires, null);
         }else if(StringUtils.isEmpty(user.getFacebookToken())){
             throw new Exception("This is not a Facebook user.");
         }else {
+            user.setName(dto.getName());
+            user.setSurname(dto.getSurname());
+            user.setProfileImage(dto.getProfileImage());
             user.setFacebookToken(facebookToken);
+        }
+        userRepository.save(user);
+    }
+
+
+    @Transactional
+    public void findOrCreateDraugiemUser(UserInfoDTO dto, String draugiemToken) throws Exception {
+        User user = userRepository.findUserByUsername(dto.getUserName());
+        if(user == null){
+            user = new User(dto.getUserName(), dto.getName(), dto.getSurname(), dto.getBirthday(), dto.getAboutMe(),
+                            dto.getCar(), dto.getCarRegNumber(), null, dto.getEmail(), true, null,
+                            dto.getProfileImage(), dto.getPreferredLanguage(), null, null, draugiemToken);
+        }else if(StringUtils.isEmpty(user.getDraugiemToken())){
+            throw new Exception("This is not a Draugiem.lv user.");
+        }else {
+            user.setName(dto.getName());
+            user.setSurname(dto.getSurname());
+            user.setBirthday(dto.getBirthday());
+            user.setProfileImage(dto.getProfileImage());
+            user.setDraugiemToken(draugiemToken);
         }
         userRepository.save(user);
     }
@@ -209,6 +239,9 @@ public class UserService {
     @Transactional
     public void changePassword(String name, String oldPassword, String newPassword) {
         User user = userRepository.findUserByUsername(name);
+
+        UserValidator.validatePasswordChange(user);
+
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         if(user != null && encoder.matches(oldPassword, user.getPasswordDigest())) {
             user.setPasswordDigest(new BCryptPasswordEncoder().encode(newPassword));
