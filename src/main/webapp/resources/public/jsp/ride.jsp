@@ -29,7 +29,6 @@
     <link rel="stylesheet" type="text/css" href="/resources/bower_components/ng-dialog/css/ngDialog-theme-default.css">
     <link rel="stylesheet" type="text/css" href="/resources/bower_components/bootstrap-language/languages.css">
     <link rel="stylesheet" type="text/css" href="/resources/bower_components/components-font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="/resources/bower_components/bootstrap-datepicker/datepicker3.css">
 
     <script src="/resources/bower_components/angular/angular.min.js"></script>
     <script src="/resources/bower_components/angular-animate/angular-animate.min.js"></script>

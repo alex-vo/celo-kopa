@@ -22,7 +22,7 @@
                     <tr ng-repeat="ride in vm.foundRides" ng-click="showRide(ride.id)">
                         <td class="title">
                             <div class="person">
-                                <div class="avatar-picture" style="background-image:url(/resources/static/{{ride.user.profileImage}})">
+                                <div class="avatar-picture" style="background-image:url({{ride.user.profileImage}})">
                                     <!--<img no-cache-src="/resources/static/{{ride.user.profileImage}}" />-->
                                 </div>
                                 <div class="person-details">

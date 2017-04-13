@@ -98,6 +98,9 @@ sampleApp.controller('BasicCtrl', ['$scope', '$cookieStore', 'UserService', '$ti
         $scope.retrieveUserData = function(){
             UserService.getUserData().then(function(success){
                 globalUserData = success;
+                if($scope.retrieveDefaultValuesFromUserData && typeof $scope.ride !== "undefined"){
+                    $scope.retrieveDefaultValuesFromUserData();
+                }
             }, function(error){
                 globalUserData = {};
             });
@@ -550,6 +553,16 @@ sampleApp.controller('DriveCtrl', ['$scope', 'DriveService', '$cookieStore', 'Us
         $scope.cancel = function(){
             $window.history.back();
         };
+
+        $scope.retrieveDefaultValuesFromUserData = function(){
+            $scope.ride.car = $scope.ride.car ? $scope.ride.car : globalUserData.car;
+            $scope.ride.carRegNumber = $scope.ride.carRegNumber ? $scope.ride.carRegNumber : globalUserData.carRegNumber;
+            $scope.ride.phone = $scope.ride.phone ? $scope.ride.phone : globalUserData.phone;
+        };
+
+        if(typeof globalUserData !== "undefined"){
+            $scope.retrieveDefaultValuesFromUserData();
+        }
     }
 ]);
 
@@ -603,9 +616,11 @@ sampleApp.controller('MyRidesCtrl', ['$scope', '$cookieStore', 'DriveService', '
     }
 ]);
 
-sampleApp.controller('ViewRideCtrl', ['$scope', '$cookieStore', 'DriveService', 'UserService', '$routeParams', '$controller',
-    function ($scope, $cookieStore, DriveService, UserService, $routeParams, $controller) {
+sampleApp.controller('ViewRideCtrl', ['$scope', '$cookieStore', 'DriveService', 'UserService', '$routeParams', '$controller', '$location',
+    function ($scope, $cookieStore, DriveService, UserService, $routeParams, $controller, $location) {
         $controller('BasicCtrl', {$scope: $scope});
+
+        $location.search('from', null).search('to', null).replace();
 
         var promise = DriveService.getRideById($routeParams.rideId);
         promise.then(function(rideData) {

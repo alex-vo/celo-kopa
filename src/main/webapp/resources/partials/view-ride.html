@@ -1,11 +1,3 @@
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=141663539258234";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 <main ng-controller="ViewRideCtrl">
     <header class="pure-g" ng-include="'/resources/partials/header.html'"></header>
     <div class="w-container">
@@ -36,6 +28,9 @@
                     </div>
                     <div class="w-col w-col-12" ng-show="ride.user.car">
                         <b>Auto:</b> {{ride.user.car}}, {{ride.user.carRegNumber}}
+                    </div>
+                    <div class="w-col w-col-12" ng-show="ride.phone">
+                        <b>Telefona numurs:</b> {{ride.phone}}
                     </div>
                     <div class="w-col w-col-4" ng-show="ride.user.car">
                         <button class="btn btn-facebook btn-lg" ng-click="shareFacebook();"><i class="fa fa-facebook fa-2"></i>Поделиться</button>
