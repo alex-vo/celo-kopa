@@ -33,6 +33,7 @@ public class User extends AbstractEntity {
     private String name;
     private String surname;
     private Date birthday;
+    private String phone;
     private String aboutMe;
     private String car;
     private String carRegNumber;
@@ -101,6 +102,16 @@ public class User extends AbstractEntity {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+
+    public String getPhone() {
+        return phone;
+    }
+
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
 

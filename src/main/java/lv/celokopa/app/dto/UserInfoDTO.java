@@ -23,19 +23,21 @@ public class UserInfoDTO {
     private Date birthday;
 
     private String profileImage;
+    private String phone;
     private String aboutMe;
     private String car;
     private String carRegNumber;
     private String preferredLanguage;
     private RegistrationType registrationType;
 
-    public UserInfoDTO(String userName, String name, String surname, String email, Date birthday, String aboutMe,
+    public UserInfoDTO(String userName, String name, String surname, String email, Date birthday, String phone, String aboutMe,
                        String car, String carRegNumber, String profileImage, String preferredLanguage, RegistrationType registrationType) {
         this.userName = userName;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.birthday = birthday;
+        this.phone = phone;
         this.aboutMe = aboutMe;
         this.car = car;
         this.carRegNumber = carRegNumber;
@@ -61,6 +63,7 @@ public class UserInfoDTO {
                                user.getSurname(),
                                user.getEmail(),
                                user.getBirthday(),
+                               user.getPhone(),
                                user.getAboutMe(),
                                user.getCar(),
                                user.getCarRegNumber(),
@@ -108,6 +111,17 @@ public class UserInfoDTO {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+
+
+    public String getPhone() {
+        return phone;
+    }
+
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
 
     public String getCar() {
         return car;

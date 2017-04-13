@@ -18,7 +18,9 @@ public class DriveDTO {
     private String driveTo;
     private String fromAddress;
     private String toAddress;
+    private String phone;
 
+    //TODO: check time zone
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "CET")
     private Date departureTime;
 
@@ -36,7 +38,7 @@ public class DriveDTO {
     public DriveDTO(){}
 
     public DriveDTO(Long id, String title, String driveFrom, String driveTo, String fromAddress, String toAddress,
-                    Date departureTime, Date arrivalTime, String text, Double price, String carRegNumber,
+                    String phone, Date departureTime, Date arrivalTime, String text, Double price, String carRegNumber,
                     Integer placesLeft, Integer placesOverall, UserInfoDTO user, String ownersLanguage) {
         this.id = id;
         this.title = title;
@@ -44,6 +46,7 @@ public class DriveDTO {
         this.driveTo = driveTo;
         this.fromAddress = fromAddress;
         this.toAddress = toAddress;
+        this.phone = phone;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.text = text;
@@ -57,7 +60,7 @@ public class DriveDTO {
 
     public static DriveDTO mapFromDriveEntity(Drive drive) {
         return new DriveDTO(drive.getId(), drive.getTitle(), drive.getDriveFrom(), drive.getDriveTo(),
-                            drive.getFromAddress(), drive.getToAddress(), drive.getDepartureTime(),
+                            drive.getFromAddress(), drive.getToAddress(), drive.getPhone(), drive.getDepartureTime(),
                             drive.getArrivalTime(), drive.getText(), drive.getPrice(), drive.getCarRegNumber(),
                             drive.getPlacesLeft(), drive.getPlacesOverall(),
                             UserInfoDTO.mapFromUserEntity(drive.getUser()), drive.getOwnersLanguage());
@@ -114,6 +117,17 @@ public class DriveDTO {
     public void setToAddress(String toAddress) {
         this.toAddress = toAddress;
     }
+
+
+    public String getPhone() {
+        return phone;
+    }
+
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
 
     public Date getDepartureTime() {
         return departureTime;

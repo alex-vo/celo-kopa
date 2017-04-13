@@ -15,4 +15,13 @@ public class UserValidator {
         }
     }
 
+
+    public static void validateUserForCreatingRide(User user) {
+        if (StringUtils.isEmpty(user.getName()) || StringUtils.isEmpty(user.getSurname())
+                || StringUtils.isEmpty(user.getEmail()) || user.getBirthday() == null
+                || StringUtils.isEmpty(user.getPhone())) {
+            throw new RuntimeException("Incomplete user profile for creating a ride.");
+        }
+    }
+
 }

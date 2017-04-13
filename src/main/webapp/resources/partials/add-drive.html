@@ -109,6 +109,21 @@
                         </div>
                         <div class="w-col w-col-6">
                             <div class="form-group" show-errors>
+                                <label for="phone" class="control-label ">Telefona numurs</label>
+                                <input id="phone" type="text" ng-model="ride.phone" name="phone" class="form-control" placeholder="Piemērs: 2 1234567" required />
+                                <p class="help-block" ng-if="form.phone.$error.required">Telefona numurs ir obligāts</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-row">
+                        <div class="w-col w-col-6">
+                            <div class="form-group">
+                                <label for="car" class="control-label ">Mašīna</label>
+                                <input id="car" type="text" ng-model="ride.car" name="placesLeft" class="form-control" placeholder="Piemērs: Audi A4" />
+                            </div>
+                        </div>
+                        <div class="w-col w-col-6">
+                            <div class="form-group" show-errors>
                                 <label for="carRegNumber" class="control-label ">Auto reģ. numurs</label>
                                 <input id="carRegNumber" type="text" ng-model="ride.carRegNumber" name="carRegNumber" class="form-control" placeholder="Piemērs: AB-1234" required />
                                 <p class="help-block" ng-if="form.carRegNumber.$error.required">Ievadiet reģistrācijas numuru</p>

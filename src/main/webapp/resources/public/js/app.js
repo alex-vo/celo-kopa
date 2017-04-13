@@ -470,7 +470,8 @@ sampleApp.controller('DriveCtrl', ['$scope', 'DriveService', '$cookieStore', 'Us
             $('#departureDateDiv').datetimepicker({
                 //defaultDate: $scope.ride.departureDate,
                 viewMode: 'days',
-                format: 'DD/MM/YYYY'
+                format: 'DD/MM/YYYY',
+                minDate: new Date()
             }).on("dp.change", function () {
                 $scope.ride.departureDateString = $("#departureDate").val();
             });
@@ -478,7 +479,8 @@ sampleApp.controller('DriveCtrl', ['$scope', 'DriveService', '$cookieStore', 'Us
             $('#arrivalDateDiv').datetimepicker({
                 //defaultDate: $scope.ride.arrivalDate,
                 viewMode: 'days',
-                format: 'DD/MM/YYYY'
+                format: 'DD/MM/YYYY',
+                minDate: new Date()
             }).on("dp.change", function () {
                 $scope.ride.arrivalDateString = $("#arrivalDate").val();
             });
@@ -515,20 +517,16 @@ sampleApp.controller('DriveCtrl', ['$scope', 'DriveService', '$cookieStore', 'Us
             var promise = DriveService.getRideById($routeParams.rideId);
             promise.then(function(rideData) {
                 parseRideObject(rideData);
-                setDates();
             }, function(errorMessage) {
                 $cookieStore.put("errorMessage", errorMessage);
                 $scope.showMessages();
             });
-        }else{
-            $scope.ride.departureDate = new Date();
-            $scope.ride.arrivalDate = new Date();
-
-            setDates();
         }
 
         $scope.ride.departureDate = new Date();
         $scope.ride.arrivalDate = new Date();
+//        $scope.ride.carRegNumber = globalUserData.carRegNumber;
+        setDates();
 
         $scope.addDrive = function () {
             $scope.$broadcast('show-errors-check-validity');
@@ -688,6 +686,7 @@ sampleApp.controller('EditProfileCtrl', ['$scope', 'UserService', '$controller',
         };
 
         $scope.editProfile = function(){
+            $scope.$broadcast('show-errors-check-validity');
             if ($scope.form.$invalid) {
                 return;
             }
@@ -699,16 +698,13 @@ sampleApp.controller('EditProfileCtrl', ['$scope', 'UserService', '$controller',
                 email: $scope.vm.email,
                 name: $scope.vm.name,
                 surname: $scope.vm.surname,
+                phone: $scope.vm.phone,
                 birthday: ("0" + $scope.vm.day).slice(-2) + "." + ("0" + $scope.vm.month).slice(-2) + "." + $scope.vm.year,
                 aboutMe: $scope.vm.aboutMe,
                 car: $scope.vm.car,
                 carRegNumber: $scope.vm.carRegNumber
             };
 
-//            var fd = new FormData();
-//            fd.append('data', new Blob([angular.toJson(postData)], {
-//                type: "application/json"
-//            }));
             $http.put("/api/user", JSON.stringify(postData), {
                 transformRequest : angular.identity,
                 transformResponse: angular.identity,

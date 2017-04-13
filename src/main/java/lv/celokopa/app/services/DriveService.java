@@ -1,18 +1,17 @@
 package lv.celokopa.app.services;
 
+import java.util.List;
 import lv.celokopa.app.dao.DriveRepository;
 import lv.celokopa.app.dao.UserRepository;
 import lv.celokopa.app.dto.DriveDTO;
 import lv.celokopa.app.model.Drive;
 import lv.celokopa.app.model.SearchResult;
 import lv.celokopa.app.model.User;
+import lv.celokopa.app.validator.DriveValidator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by alex on 15.30.12.
@@ -51,42 +50,51 @@ public class DriveService {
         return drive;
     }
 
+
     @Transactional
-    public Drive saveDrive(String username, Long id, String title, String driveFrom, String driveTo, String fromAddress,
-                           String toAddress, Date departureTime, Date arrivalTime, String text, Double price,
-                           String carRegNumber, Integer placesLeft, Integer placesOverall, String ownersLanguage) throws Exception {
+    public Drive saveDrive(String username, DriveDTO driveDTO)
+            throws Exception {
 
         Drive drive;
-        if(id != null){
-            drive = driveRepository.findDriveById(id);
-            if(drive != null && !username.equals(drive.getUser().getUsername())){
-                throw new Exception("Drive and user do not match");
+        if (driveDTO.getId() != null) {
+            drive = driveRepository.findDriveById(driveDTO.getId());
+            if (drive != null && !username.equals(drive.getUser().getUsername())) {
+                throw new Exception("Drive does not belong to user");
             }
-        }else{
+        } else {
             User user = userRepository.findUserByUsername(username);
-            drive = driveRepository.save(new Drive(user, title, driveFrom, driveTo, fromAddress, toAddress, departureTime, arrivalTime, text,
-                    price, carRegNumber, placesLeft, placesOverall, ownersLanguage));
+            drive = new Drive(user,
+                              driveDTO.getTitle(),
+                              driveDTO.getDriveFrom(),
+                              driveDTO.getDriveTo(),
+                              driveDTO.getFromAddress(),
+                              driveDTO.getToAddress(),
+                              driveDTO.getPhone(),
+                              driveDTO.getDepartureTime(),
+                              driveDTO.getArrivalTime(),
+                              driveDTO.getText(),
+                              driveDTO.getPrice(),
+                              driveDTO.getCarRegNumber(),
+                              driveDTO.getPlacesLeft(),
+                              driveDTO.getPlacesOverall(),
+                              driveDTO.getOwnersLanguage());
         }
-        drive.setTitle(title);
-        drive.setDriveFrom(driveFrom);
-        drive.setDriveTo(driveTo);
-        drive.setFromAddress(fromAddress);
-        drive.setToAddress(toAddress);
-        drive.setDepartureTime(departureTime);
-        drive.setArrivalTime(arrivalTime);
-        drive.setText(text);
-        drive.setPrice(price);
-        drive.setCarRegNumber(carRegNumber);
-        drive.setPlacesLeft(placesLeft);
-        drive.setPlacesOverall(placesOverall);
-        return driveRepository.save(drive);
-    }
+        drive.setTitle(driveDTO.getTitle());
+        drive.setDriveFrom(driveDTO.getDriveFrom());
+        drive.setDriveTo(driveDTO.getDriveTo());
+        drive.setFromAddress(driveDTO.getFromAddress());
+        drive.setToAddress(driveDTO.getToAddress());
+        drive.setDepartureTime(driveDTO.getDepartureTime());
+        drive.setArrivalTime(driveDTO.getArrivalTime());
+        drive.setText(driveDTO.getText());
+        drive.setPrice(driveDTO.getPrice());
+        drive.setCarRegNumber(driveDTO.getCarRegNumber());
+        drive.setPlacesLeft(driveDTO.getPlacesLeft());
+        drive.setPlacesOverall(driveDTO.getPlacesOverall());
 
-    public Drive saveDrive(String username, DriveDTO driveDTO) throws Exception {
-        return saveDrive(username, driveDTO.getId(), driveDTO.getTitle(), driveDTO.getDriveFrom(), driveDTO.getDriveTo(), driveDTO.getFromAddress(),
-                driveDTO.getToAddress(), driveDTO.getDepartureTime(), driveDTO.getArrivalTime(), driveDTO.getText(),
-                driveDTO.getPrice(), driveDTO.getCarRegNumber(), driveDTO.getPlacesLeft(), driveDTO.getPlacesOverall(),
-                         driveDTO.getOwnersLanguage());
+        DriveValidator.validateNewRide(drive);
+
+        return driveRepository.save(drive);
     }
 
     public void deleteDrive(String username, Long id) throws Exception {

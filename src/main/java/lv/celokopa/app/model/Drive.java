@@ -20,6 +20,7 @@ public class Drive extends AbstractEntity{
     private String driveTo;
     private String fromAddress;
     private String toAddress;
+    private String phone;
     private Date departureTime;
     private Date arrivalTime;
     private String text;
@@ -32,7 +33,7 @@ public class Drive extends AbstractEntity{
     public Drive(){}
 
     public Drive(User user, String title, String driveFrom, String driveTo, String fromAddress, String toAddress,
-                 Date departureTime, Date arrivalTime, String text, Double price, String carRegNumber,
+                 String phone, Date departureTime, Date arrivalTime, String text, Double price, String carRegNumber,
                  Integer placesLeft, Integer placesOverall, String ownersLanguage) {
         this.user = user;
         this.title = title;
@@ -40,6 +41,7 @@ public class Drive extends AbstractEntity{
         this.driveTo = driveTo;
         this.fromAddress = fromAddress;
         this.toAddress = toAddress;
+        this.phone = phone;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.text = text;
@@ -97,6 +99,17 @@ public class Drive extends AbstractEntity{
     public void setToAddress(String toAddress) {
         this.toAddress = toAddress;
     }
+
+
+    public String getPhone() {
+        return phone;
+    }
+
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
 
     public Date getDepartureTime() {
         return departureTime;

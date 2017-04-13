@@ -44,16 +44,16 @@ public class TestDataInitializer {
         session.persist(user1);
 
         session.persist(new Drive(user, "A drive to Dpils", "Rīga", "Daugavpils", "Brivibas 20", "Skolas iela 25",
-                                  new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()+1000*60*60*3), "I go Dpils", 20.,
+                                  "28899747", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()+1000*60*60*3), "I go Dpils", 20.,
                                   "BA-8283", 3, 4, "lv_LV"));
         session.persist(new Drive(user, "A drive to Liepaja", "Rīga", "Liepāja", "Kalku 10", "Rigas iela 25",
-                new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()+1000*60*60*3), "I go Liepaja", 10.,
+                                  "28899747", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()+1000*60*60*3), "I go Liepaja", 10.,
                 "EH-1409", 3, 4, "lv_LV"));
         session.persist(new Drive(user, "A drive to Ventspils", "Rīga", "Ventspils", "Centrala stacija", "Raina iela 15",
-                new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()+1000*60*60*3), "I go Ventspils", 15.,
+                                  "28899747", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()+1000*60*60*3), "I go Ventspils", 15.,
                 "HD-2658", 3, 4, "ru_RU"));
         session.persist(new Drive(user, "Поездка в вентак", "Rīga", "Ventspils", "Маскачка", "Парвента",
-                new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()+1000*60*60*3), "Весёлое путешествие", 20.,
+                                  "28899747", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()+1000*60*60*3), "Весёлое путешествие", 20.,
                 "AA-1234", 2, 5, "ru_RU"));
 
         session.persist(new Locality("Rīga", "", ""));

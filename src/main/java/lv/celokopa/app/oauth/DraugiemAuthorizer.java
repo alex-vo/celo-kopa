@@ -90,6 +90,7 @@ public class DraugiemAuthorizer {
                 null,
                 null,
                 null,
+                null,
                 userObject.get("imgl").getAsString(),
                 language,
                 RegistrationType.DRAUGIEM);

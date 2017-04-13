@@ -128,6 +128,7 @@ public class UserService {
         user.setAboutMe(userInfoDTO.getAboutMe());
         user.setCar(userInfoDTO.getCar());
         user.setCarRegNumber(userInfoDTO.getCarRegNumber());
+        user.setPhone(userInfoDTO.getPhone());
         userRepository.save(user);
     }
 

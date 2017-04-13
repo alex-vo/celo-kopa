@@ -91,6 +91,7 @@ public class FacebookAuthorizer {
                 null,
                 null,
                 null,
+                null,
                 basicInfoObject.get("picture").getAsJsonObject().get("data").getAsJsonObject().get("url").getAsString(),
                 preferredLanguage,
                 RegistrationType.FACEBOOK);

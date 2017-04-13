@@ -22,10 +22,11 @@ angular.module('frontendServices', [])
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: '/api/user'
+                    url: '/api/user',
+                    responseType:'json'
                 })
                 .then(function (response) {
-                    if (response.status == 200) {
+                    if (response.status == 200 && response.data) {
                         deferred.resolve(response.data);
                     } else {
                         deferred.reject("error.userdata");

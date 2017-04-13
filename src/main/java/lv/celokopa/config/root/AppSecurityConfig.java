@@ -1,12 +1,11 @@
 package lv.celokopa.config.root;
 
 
+import com.allanditzel.springframework.security.web.csrf.CsrfTokenResponseHeaderBindingFilter;
+import javax.sql.DataSource;
 import lv.celokopa.app.security.AjaxAuthenticationFailureHandler;
 import lv.celokopa.app.security.AjaxAuthenticationSuccessHandler;
 import lv.celokopa.app.security.SecurityUserDetailsService;
-import com.allanditzel.springframework.security.web.csrf.CsrfTokenResponseHeaderBindingFilter;
-import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -91,7 +90,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
             if (authException != null) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.sendRedirect("/");
             }
         });
 
@@ -105,8 +104,5 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/resources/**");
     }
-
-
-
 
 }

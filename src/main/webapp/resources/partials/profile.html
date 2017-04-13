@@ -29,6 +29,9 @@
                     <div class="w-col w-col-12">
                         <b>Vārds:</b> {{user.name}} {{user.surname}}
                     </div>
+                    <div class="w-col w-col-12" ng-show="user.phone">
+                        <b>Telefona numurs:</b> {{user.phone}}
+                    </div>
                     <div class="w-col w-col-12" ng-show="user.birthday">
                         <b>Dzimšanas diena:</b> {{user.birthday}}
                     </div>
