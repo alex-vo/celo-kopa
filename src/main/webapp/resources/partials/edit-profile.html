@@ -45,33 +45,40 @@
                             </div>
                         </div>
                         <div class="w-col w-col-6">
-                            <label for="day" class="control-label ">Dzimšanas diena</label>
                             <div class="form-group" show-errors>
+                                <label class="control-label ">Dzimšanas diena</label>
                                 <table class="birthday-input-table">
                                     <tr>
                                         <td>
-                                            <select id="day" name="day"
+                                            <select id="day" name="myday"
                                                     ng-model="vm.day"
                                                     ng-options="day for day in days" class="form-control"
                                                     ng-disabled="vm.registrationType=='DRAUGIEM'"
-                                                    required></select>
+                                                    ng-blur="check()">
+                                                <option value="">--</option>
+                                            </select>
                                         </td>
                                         <td>
-                                            <select id="month" name="month"
+                                            <select id="month" name="mymonth"
                                                     ng-model="vm.month"
                                                     ng-options="month.value as month.text for month in months" class="form-control"
                                                     ng-disabled="vm.registrationType=='DRAUGIEM'"
-                                                    required></select>
+                                                    ng-blur="check()">
+                                                <option value="">--</option>
+                                            </select>
                                         </td>
                                         <td>
-                                            <select id="year" name="year"
+                                            <select id="year" name="myyear"
                                                     ng-model="vm.year"
                                                     ng-options="year for year in years" class="form-control"
                                                     ng-disabled="vm.registrationType=='DRAUGIEM'"
-                                                    required></select>
+                                                    ng-blur="check()">
+                                                <option value="">--</option>
+                                            </select>
                                         </td>
                                     </tr>
                                 </table>
+                                <p class="help-block" ng-if="form.myyear.$invalid">ir obligāts</p>
                             </div>
                         </div>
                     </div>

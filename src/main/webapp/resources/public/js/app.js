@@ -682,17 +682,18 @@ sampleApp.controller('EditProfileCtrl', ['$scope', 'UserService', '$controller',
 
         //todo: don't call user endpoint
         UserService.getUserData().then(function(userData){
-            console.log(userData);
             $scope.vm = userData;
             if($scope.vm.birthday){
+                console.log("Birthday");
                 $scope.vm.day = parseInt($scope.vm.birthday.split(".")[0]);
                 $scope.vm.month = parseInt($scope.vm.birthday.split(".")[1]);
                 $scope.vm.year = parseInt($scope.vm.birthday.split(".")[2]);
             }else{
-                var now = new Date();
-                $scope.vm.day = now.getDate();
-                $scope.vm.month = now.getMonth() + 1;
-                $scope.vm.year = now.getUTCFullYear();
+                console.log("NO Birthday");
+//                var now = new Date();
+//                $scope.vm.day = now.getDate();
+//                $scope.vm.month = now.getMonth() + 1;
+//                $scope.vm.year = now.getUTCFullYear();
             }
         });
 
@@ -736,6 +737,12 @@ sampleApp.controller('EditProfileCtrl', ['$scope', 'UserService', '$controller',
                     $scope.showMessages();
                 }
             });
+        };
+
+        $scope.check = function(){
+            console.log("CHEKC");
+            $scope.form.myyear.$invalid = true;
+            $scope.$broadcast('show-errors-check-validity');
         };
     }
 ]);
