@@ -676,7 +676,7 @@ sampleApp.controller('EditProfileCtrl', ['$scope', 'UserService', '$controller',
             for (i = 1900; i <= (new Date()).getUTCFullYear(); i++) {
                 $scope.years.push(i);
             }
-        }
+        };
 
         initDates();
 
@@ -688,12 +688,6 @@ sampleApp.controller('EditProfileCtrl', ['$scope', 'UserService', '$controller',
                 $scope.vm.day = parseInt($scope.vm.birthday.split(".")[0]);
                 $scope.vm.month = parseInt($scope.vm.birthday.split(".")[1]);
                 $scope.vm.year = parseInt($scope.vm.birthday.split(".")[2]);
-            }else{
-                console.log("NO Birthday");
-//                var now = new Date();
-//                $scope.vm.day = now.getDate();
-//                $scope.vm.month = now.getMonth() + 1;
-//                $scope.vm.year = now.getUTCFullYear();
             }
         });
 
@@ -701,8 +695,13 @@ sampleApp.controller('EditProfileCtrl', ['$scope', 'UserService', '$controller',
             $location.path('/profile');
         };
 
-        $scope.editProfile = function(){
+        var validateAllFields = function(){
+            $scope.check();
             $scope.$broadcast('show-errors-check-validity');
+        };
+
+        $scope.editProfile = function(){
+            validateAllFields();
             if ($scope.form.$invalid) {
                 return;
             }
@@ -740,9 +739,15 @@ sampleApp.controller('EditProfileCtrl', ['$scope', 'UserService', '$controller',
         };
 
         $scope.check = function(){
-            console.log("CHEKC");
-            $scope.form.myyear.$invalid = true;
-            $scope.$broadcast('show-errors-check-validity');
+            var valid = true;
+            if(!$scope.form.myday.$modelValue || !$scope.form.mymonth.$modelValue || !$scope.form.myyear.$modelValue){
+                valid = false;
+            }
+            $scope.form.myday.$setValidity("completeBirthday", valid);
+        };
+
+        $scope.focus = function(){
+            $scope.form.myday.$setValidity("completeBirthday", true);
         };
     }
 ]);

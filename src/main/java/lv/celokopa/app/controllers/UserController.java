@@ -38,9 +38,7 @@ public class UserController {
 
         User user = userService.findUserByUsername(principal.getName());
 
-        UserInfoDTO dto = UserInfoDTO.mapFromUserEntity(user);
-        System.out.println(dto);
-        return user != null ? dto : null;
+        return user != null ? UserInfoDTO.mapFromUserEntity(user) : null;
     }
 
 

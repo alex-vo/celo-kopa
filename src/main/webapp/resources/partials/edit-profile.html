@@ -23,7 +23,7 @@
                             <div class="form-group" show-errors>
                                 <label class="control-label">Vārds</label>
                                 <input type="text" class="form-control" name="name" ng-model="vm.name"
-                                       ng-disabled="vm.registrationType=='FACEBOOK' || vm.registrationType=='DRAUGIEM'" required />
+                                       ng-disabled="(vm.registrationType=='FACEBOOK' || vm.registrationType=='DRAUGIEM') && vm.name" required />
                                 <p class="help-block" ng-if="form.name.$error.required">Vārds ir obligāts</p>
                             </div>
                         </div>
@@ -31,7 +31,7 @@
                             <div class="form-group" show-errors>
                                 <label class="control-label">Uzvārds</label>
                                 <input type="text" class="form-control" name="surname" ng-model="vm.surname"
-                                       ng-disabled="vm.registrationType=='FACEBOOK' || vm.registrationType=='DRAUGIEM'" />
+                                       ng-disabled="(vm.registrationType=='FACEBOOK' || vm.registrationType=='DRAUGIEM') && vm.surname" />
                                 <p class="help-block" ng-if="form.surname.$error.required">Uzvārds ir obligāts</p>
                             </div>
                         </div>
@@ -54,7 +54,8 @@
                                                     ng-model="vm.day"
                                                     ng-options="day for day in days" class="form-control"
                                                     ng-disabled="vm.registrationType=='DRAUGIEM'"
-                                                    ng-blur="check()">
+                                                    ng-blur="check()"
+                                                    ng-focus="focus()">
                                                 <option value="">--</option>
                                             </select>
                                         </td>
@@ -63,7 +64,8 @@
                                                     ng-model="vm.month"
                                                     ng-options="month.value as month.text for month in months" class="form-control"
                                                     ng-disabled="vm.registrationType=='DRAUGIEM'"
-                                                    ng-blur="check()">
+                                                    ng-blur="check()"
+                                                    ng-focus="focus()">
                                                 <option value="">--</option>
                                             </select>
                                         </td>
@@ -72,13 +74,14 @@
                                                     ng-model="vm.year"
                                                     ng-options="year for year in years" class="form-control"
                                                     ng-disabled="vm.registrationType=='DRAUGIEM'"
-                                                    ng-blur="check()">
+                                                    ng-blur="check()"
+                                                    ng-focus="focus()">
                                                 <option value="">--</option>
                                             </select>
                                         </td>
                                     </tr>
                                 </table>
-                                <p class="help-block" ng-if="form.myyear.$invalid">ir obligāts</p>
+                                <p class="help-block" ng-show="form.myday.$error.completeBirthday">Dzimšanas datums ir obligāts</p>
                             </div>
                         </div>
                     </div>
