@@ -114,23 +114,6 @@ sampleApp.controller('BasicCtrl', ['$scope', '$cookieStore', 'UserService', '$ti
             return false;
         };
 
-        $scope.goToAddRide = function(){
-            $http.get("/api/user/checkFullProfile").then(function(data){
-                if(data.status == 200) {
-                    $location.path('/add-ride');
-                }else{
-                    $uibModal.open({
-                        animation: true,
-                        ariaLabelledBy: 'modal-title',
-                        ariaDescribedBy: 'modal-body',
-                        templateUrl: '/resources/partials/not-full-profile.html',
-                        controller: 'ModalInstanceCtrl',
-                        controllerAs: '$ctrl'
-                    });
-                }
-            });
-        };
-
         $scope.logout = function () {
             globalUserData = undefined;
             UserService.logout();
@@ -449,9 +432,24 @@ sampleApp.controller('NewUserCtrl', ['$scope', '$http', '$cookieStore', '$contro
     };
 });
 
-sampleApp.controller('DriveCtrl', ['$scope', 'DriveService', '$cookieStore', 'UserService', 'SearchService', '$routeParams', '$controller', '$filter', '$http', '$window',
-    function ($scope, DriveService, $cookieStore, UserService, SearchService, $routeParams, $controller, $filter, $http, $window) {
+sampleApp.controller('DriveCtrl', ['$scope', 'DriveService', '$cookieStore', 'UserService', 'SearchService', '$routeParams', '$controller', '$filter', '$http', '$window', '$uibModal',
+    function ($scope, DriveService, $cookieStore, UserService, SearchService, $routeParams, $controller, $filter, $http, $window, $uibModal) {
         $controller('BasicCtrl', {$scope: $scope});
+
+        $http.get("/api/user/checkFullProfile").then(function(data){
+            if(data.status != 200) {
+                $uibModal.open({
+                    animation: true,
+                    ariaLabelledBy: 'modal-title',
+                    ariaDescribedBy: 'modal-body',
+                    templateUrl: '/resources/partials/not-full-profile.html',
+                    controller: 'ModalInstanceCtrl',
+                    controllerAs: '$ctrl'
+                }).closed.then(function(){
+                    window.location.href = "/";
+                });
+            }
+        });
 
         $scope.validFromValues = [];
         $scope.validToValues = [];
@@ -528,7 +526,6 @@ sampleApp.controller('DriveCtrl', ['$scope', 'DriveService', '$cookieStore', 'Us
 
         $scope.ride.departureDate = new Date();
         $scope.ride.arrivalDate = new Date();
-//        $scope.ride.carRegNumber = globalUserData.carRegNumber;
         setDates();
 
         $scope.addDrive = function () {

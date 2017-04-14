@@ -24,9 +24,9 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li style="text-align: center;" ng-show="isLoggedIn()">
-                    <!--<form id="go-home" action="/add-ride">-->
-                        <button ng-click="goToAddRide()" class="btn btn-primary offer-ride-button">Предложить поездку</button>
-                    <!--</form>-->
+                    <form id="go-home" action="/add-ride">
+                        <button type="submit" class="btn btn-primary offer-ride-button">Предложить поездку</button>
+                    </form>
                 </li>
                 <li style="text-align: center;" ng-show="isLoggedIn()"><a href="/my-rides">Мои поездки</a></li>
                 <li style="text-align: center;" ng-show="isLoggedIn()"><a href="/">Искать</a></li>
