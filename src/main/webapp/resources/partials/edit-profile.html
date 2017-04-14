@@ -50,7 +50,7 @@
                                 <table class="birthday-input-table">
                                     <tr>
                                         <td>
-                                            <select id="day" name="myday"
+                                            <select id="day" name="day"
                                                     ng-model="vm.day"
                                                     ng-options="day for day in days" class="form-control"
                                                     ng-disabled="vm.registrationType=='DRAUGIEM'"
@@ -60,7 +60,7 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <select id="month" name="mymonth"
+                                            <select id="month" name="month"
                                                     ng-model="vm.month"
                                                     ng-options="month.value as month.text for month in months" class="form-control"
                                                     ng-disabled="vm.registrationType=='DRAUGIEM'"
@@ -70,7 +70,7 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <select id="year" name="myyear"
+                                            <select id="year" name="year"
                                                     ng-model="vm.year"
                                                     ng-options="year for year in years" class="form-control"
                                                     ng-disabled="vm.registrationType=='DRAUGIEM'"
@@ -81,7 +81,7 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <p class="help-block" ng-show="form.myday.$error.completeBirthday">Dzimšanas datums ir obligāts</p>
+                                <p class="help-block" ng-show="form.day.$error.completeBirthday">Dzimšanas datums ir obligāts</p>
                             </div>
                         </div>
                     </div>
@@ -97,14 +97,14 @@
                         <div class="w-col w-col-6">
                             <div class="form-group">
                                 <label for="car" class="control-label">Mašīna</label>
-                                <input id="car" name="car" type="text" class="form-control" placeholder="Piemērs: Audi A6" ng-model="vm.car" required>
+                                <input id="car" name="car" type="text" class="form-control" placeholder="Piemērs: Audi A6" ng-model="vm.car">
                                 <p class="help-block" ng-if="form.car.$error.required">Ievadiet auto</p>
                             </div>
                         </div>
                         <div class="w-col w-col-6">
                             <div class="form-group">
                                 <label for="carRegNumber" class="control-label ">Auto reģ. numurs</label>
-                                <input id="carRegNumber" type="text" class="form-control" ng-model="vm.carRegNumber" name="carRegNumber" placeholder="Piemērs: AB-1234" required>
+                                <input id="carRegNumber" type="text" class="form-control" ng-model="vm.carRegNumber" name="carRegNumber" placeholder="Piemērs: AB-1234">
                                 <p class="help-block" ng-if="form.carRegNumber.$error.required">Ievadiet auto reģistrācijas numuru</p>
                             </div>
                         </div>

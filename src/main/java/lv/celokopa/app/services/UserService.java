@@ -8,8 +8,6 @@ import lv.celokopa.app.model.User;
 import lv.celokopa.app.util.EmailSender;
 import lv.celokopa.app.util.FileHelper;
 import lv.celokopa.app.util.RandomStringGenerator;
-import java.util.Date;
-import java.util.regex.Pattern;
 import lv.celokopa.app.validator.UserValidator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -20,9 +18,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import static lv.celokopa.app.services.ValidationUtils.assertMatches;
-import static lv.celokopa.app.services.ValidationUtils.assertMinimumLength;
-import static lv.celokopa.app.services.ValidationUtils.assertNotBlank;
+import java.util.Date;
+import java.util.regex.Pattern;
+
+import static lv.celokopa.app.services.ValidationUtils.*;
 
 /**
  *
@@ -253,6 +252,6 @@ public class UserService {
     public boolean isFullProfile(String userName){
         User user = userRepository.findUserByUsername(userName);
         return user != null && StringUtils.isNotEmpty(user.getName()) && StringUtils.isNotEmpty(user.getSurname())
-                && StringUtils.isNotEmpty(user.getCar()) && StringUtils.isNotEmpty(user.getCarRegNumber());
+                && StringUtils.isNotEmpty(user.getPhone()) && user.getBirthday() != null;
     }
 }

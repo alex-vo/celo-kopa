@@ -670,7 +670,7 @@ sampleApp.controller('EditProfileCtrl', ['$scope', 'UserService', '$controller',
             for (var i = 1; i <= 31; i++) {
                 $scope.days.push(i);
             }
-            for (i = 1900; i <= (new Date()).getUTCFullYear(); i++) {
+            for (i = (new Date()).getUTCFullYear(); i >= 1900 ; i--) {
                 $scope.years.push(i);
             }
         };
@@ -737,14 +737,14 @@ sampleApp.controller('EditProfileCtrl', ['$scope', 'UserService', '$controller',
 
         $scope.check = function(){
             var valid = true;
-            if(!$scope.form.myday.$modelValue || !$scope.form.mymonth.$modelValue || !$scope.form.myyear.$modelValue){
+            if(!$scope.form.day.$modelValue || !$scope.form.month.$modelValue || !$scope.form.year.$modelValue){
                 valid = false;
             }
-            $scope.form.myday.$setValidity("completeBirthday", valid);
+            $scope.form.day.$setValidity("completeBirthday", valid);
         };
 
         $scope.focus = function(){
-            $scope.form.myday.$setValidity("completeBirthday", true);
+            $scope.form.day.$setValidity("completeBirthday", true);
         };
     }
 ]);
