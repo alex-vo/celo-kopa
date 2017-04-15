@@ -58,7 +58,7 @@ public class ProductionConfiguration extends WebMvcConfigurerAdapter {
         jpaProperties.put("hibernate.show_sql", "false");
         jpaProperties.put("hibernate.format_sql", "true");
         jpaProperties.put("hibernate.use_sql_comments", "true");
-        jpaProperties.put("hibernate.dialect", "CustomMySQLDialect");
+        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         jpaProperties.put("hibernate.connection.CharSet", "utf8");
         jpaProperties.put("hibernate.connection.characterEncoding", "utf8");
         jpaProperties.put("hibernate.connection.useUnicode", "true");
