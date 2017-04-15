@@ -1,9 +1,6 @@
 package lv.celokopa.config.root;
 
-
 import lv.celokopa.app.init.TestDataInitializer;
-import java.util.HashMap;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,20 +16,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.util.HashMap;
+import java.util.Map;
 
-/**
- *
- * Integration testing specific configuration - creates a in-memory datasource,
- * sets hibernate on create drop mode and inserts some test data on the database.
- *
- * This allows to clone the project repository and start a running application with the command
- *
- * mvn clean install tomcat7:run-war -Dspring.profiles.active=test
- *
- * Access http://localhost:8080/ and login with test123 / Password2, in order to see some test data,
- * or create a new user.
- *
- */
 @Configuration
 @Profile("test")
 @PropertySource("classpath:local.properties")

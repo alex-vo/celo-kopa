@@ -2,7 +2,6 @@ package lv.celokopa.app.init;
 
 
 import lv.celokopa.app.model.Drive;
-import lv.celokopa.app.model.Locality;
 import lv.celokopa.app.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -56,15 +55,15 @@ public class TestDataInitializer {
                                   "28899747", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()+1000*60*60*3), "Весёлое путешествие", 20.,
                 "AA-1234", 2, 5, "ru_RU"));
 
-        session.persist(new Locality("Rīga", "", ""));
-        session.persist(new Locality("Ventspils", "", ""));
-        session.persist(new Locality("Jelgava", "", ""));
-        session.persist(new Locality("Liepāja", "", ""));
-        session.persist(new Locality("Vanagi", "", ""));
-        session.persist(new Locality("Valmiera", "", ""));
-        session.persist(new Locality("Valmiermuiža", "", ""));
-        session.persist(new Locality("Vabole", "", ""));
-        session.persist(new Locality("Vadakste", "", ""));
+//        session.persist(new Locality("Rīga", "", ""));
+//        session.persist(new Locality("Ventspils", "", ""));
+//        session.persist(new Locality("Jelgava", "", ""));
+//        session.persist(new Locality("Liepāja", "", ""));
+//        session.persist(new Locality("Vanagi", "", ""));
+//        session.persist(new Locality("Valmiera", "", ""));
+//        session.persist(new Locality("Valmiermuiža", "", ""));
+//        session.persist(new Locality("Vabole", "", ""));
+//        session.persist(new Locality("Vadakste", "", ""));
 
 
         transaction.commit();

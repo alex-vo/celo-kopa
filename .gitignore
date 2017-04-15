@@ -6,6 +6,5 @@ node_modules
 target/
 target/**
 bower_components
-src/main/resources/local.properties
-src/main/resources/development.properties
+src/main/resources/*.properties
 src/main/resources/context.xml
