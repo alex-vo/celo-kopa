@@ -7,34 +7,34 @@
             <form id="loginForm" name="loginForm" class="pure-form login-form" role="loginForm" ng-submit="loginForm.$valid && onLogin()">
                 <fieldset class="pure-group">
                     <div class="edit-profile-heading">
-                        <h2>Авторизация</h2>
+                        <h2>{{ 'login.authorization' | translate }}</h2>
                     </div>
                     <div class="col-md-4 col-md-offset-4">
                         <a class="btn btn-facebook btn-lg" href="http://www.facebook.com/dialog/oauth?client_id=1846099332311134&redirect_uri=http%3A%2F%2Ftest.celokopa.lv%2FfacebookCallback"><i class="fa fa-facebook fa-2"></i>Войти</a>
                         <a class="btn btn-draugiem btn-lg" href="http://api.draugiem.lv/authorize/?app=15020521&hash=a4a48aabcf06cc7a66264d2f6c27ad0f&redirect=http://test.celokopa.lv/draugiemCallback"><i class="fa fa-draugiem fa-2"></i>Ienākt</a>
                     </div>
                     <div class="col-md-4 col-md-offset-4">
-                        <label for="username" class="control-label">Логин или эл. почта</label>
+                        <label for="username" class="control-label">{{ 'login.login-or-email' | translate }}</label>
                         <div class="form-group">
                             <input id="username" type="text" ng-focus="focus('username')" ng-blur="blur('username')" ng-model="vm.username"
-                                   name="username" class="form-control" data-error="Поле обязательно" required>
+                                   name="username" class="form-control" required>
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
                     <div class="col-md-4 col-md-offset-4">
-                        <label for="password" class="control-label">Пароль</label>
+                        <label for="password" class="control-label">{{ 'login.password' | translate }}</label>
                         <div class="form-group">
                             <input id="password" type="password" ng-focus="focus('password')" ng-blur="blur('password')" ng-model="vm.password"
-                                   name="username" class="form-control" data-minlength="6" data-error="Минимум 6 символов" required>
+                                   name="username" class="form-control" data-minlength="6" required>
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
                 </fieldset>
                 <div class="col-md-4 col-md-offset-4">
-                    <button type="submit" class="btn btn-primary offer-ride-button"><i class="glyphicon glyphicon-refresh spinning"></i>Войти</button>
+                    <button type="submit" class="btn btn-primary offer-ride-button"><i class="glyphicon glyphicon-refresh spinning"></i>{{ 'login.login' | translate }}</button>
                 </div>
                 <div class="col-md-4 col-md-offset-4">
-                    <a class="new-user-link" href="/register">Регистрация</a> <a class="new-user-link" href="/restore-password">Забыли пароль?</a>
+                    <a class="new-user-link" href="/register">{{ 'login.registration' | translate }}</a> <a class="new-user-link" href="/restore-password">{{ 'login.forgot-password' | translate }}</a>
                 </div>
             </form>
         </div>

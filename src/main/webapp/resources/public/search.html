@@ -59,37 +59,31 @@
     <div class="search-form-container3">
         <div class="how-it-works-container w-container">
             <h1>{{ 'home.travel-cheaper' | translate }}</h1>
-            <div>Выбирай маршрут и отправляйся навстречу приключениям.</div><a class="how-it-works-button w-button" href="#">Как это работает?</a>
+            <div>{{ 'home.choose-route' | translate }}</div><a class="how-it-works-button w-button" href="#">{{ 'home.how-it-works' | translate }}</a>
         </div>
         <div class="search-form-continer2">
             <div class="search-form-container1 w-container">
-                <div class="find-buddies">Найдите своих попутчиков и составьте им компанию.</div>
+                <div class="find-buddies">{{ 'home.find-buddies' | translate }}</div>
                 <div class="w-form">
                     <form class="search-form" ng-submit="onSearch()">
                         <div class="w-row">
                             <div class="search-column w-col w-col-5">
                                 <div class="search-div">
-                                    <label class="search-field-label">Откуда?</label>
-                                    <input id="from" placeholder="Пример: Rīga" ng-model="from" class="search-field w-input" />
+                                    <label class="search-field-label">{{ 'home.from' | translate }}</label>
+                                    <input id="from" placeholder="Rīga" ng-model="from" class="search-field w-input" />
                                 </div>
                             </div>
                             <div class="search-column w-col w-col-5">
                                 <div class="search-div">
-                                    <label class="search-field-label">Куда?</label>
-                                    <input id="to" placeholder="Пример: Daugavpils" ng-model="to" class="search-field w-input" />
+                                    <label class="search-field-label">{{ 'home.to' | translate }}</label>
+                                    <input id="to" placeholder="Daugavpils" ng-model="to" class="search-field w-input" />
                                 </div>
                             </div>
                             <div class="last-column w-col w-col-2">
-                                <input class="search-button w-button btn btn-primary" type="submit" value="Найти" />
+                                <input class="search-button w-button btn btn-primary" type="submit" value="{{ 'home.find' | translate }}" />
                             </div>
                         </div>
                     </form>
-                    <div class="w-form-done">
-                        <div>Thank you! Your submission has been received!</div>
-                    </div>
-                    <div class="w-form-fail">
-                        <div>Oops! Something went wrong while submitting the form</div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -98,25 +92,25 @@
         <div class="w-container">
             <div class="travel-between-cities w-row">
                 <div class="w-col w-col-6">
-                    <h3 class="travel-together">Путешествуйте вместе</h3>
-                    <div>Быстрее из пункта А в пункт Б.</div>
+                    <h3 class="travel-together">{{ 'home.travel-together' | translate }}</h3>
+                    <div>{{ 'home.faster-ab' | translate }}</div>
                 </div>
                 <div class="w-col w-col-2">
                     <div class="roue-shortcut">
-                        <div class="towns-shortcut">Рига
-                            <br>Даугавпилс</div>
+                        <div class="towns-shortcut">{{ 'home.riga' | translate }}
+                            <br>{{ 'home.daugavpils' | translate }}</div>
                     </div>
                 </div>
                 <div class="w-col w-col-2">
                     <div class="roue-shortcut">
-                        <div class="towns-shortcut">Юрмала
-                            <br>Вентспилс</div>
+                        <div class="towns-shortcut">{{ 'home.jurmala' | translate }}
+                            <br>{{ 'home.ventspils' | translate }}</div>
                     </div>
                 </div>
                 <div class="w-col w-col-2">
                     <div class="roue-shortcut">
-                        <div class="towns-shortcut">Елгава
-                            <br>Рига</div>
+                        <div class="towns-shortcut">{{ 'home.jelgava' | translate }}
+                            <br>{{ 'home.riga' | translate }}</div>
                     </div>
                 </div>
             </div>
@@ -124,7 +118,7 @@
     </div>
     <div class="advantages-section">
         <div class="advantages-header-container w-container">
-            <h1 class="advantages">Преимущества</h1>
+            <h1 class="advantages">{{ 'home.advantages' | translate }}</h1>
         </div>
         <div class="w-container">
             <div class="w-row">

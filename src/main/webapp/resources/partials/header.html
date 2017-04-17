@@ -25,14 +25,14 @@
             <ul class="nav navbar-nav navbar-right">
                 <li style="text-align: center;" ng-show="isLoggedIn()">
                     <form id="go-home" action="/add-ride">
-                        <button type="submit" class="btn btn-primary offer-ride-button">Предложить поездку</button>
+                        <button type="submit" class="btn btn-primary offer-ride-button">{{ 'header.offer-ride' | translate }}</button>
                     </form>
                 </li>
-                <li style="text-align: center;" ng-show="isLoggedIn()"><a href="/my-rides">Мои поездки</a></li>
-                <li style="text-align: center;" ng-show="isLoggedIn()"><a href="/">Искать</a></li>
-                <li style="text-align: center;" ng-show="isLoggedIn()"><a href="/profile">Профиль</a></li>
-                <li style="text-align: center;" ng-show="isLoggedIn()"><a href="#" ng-click="logout()">Выйти</a></li>
-                <li style="text-align: center;" ng-hide="isLoggedIn()"><a href="/login">Войти</a></li>
+                <li style="text-align: center;" ng-show="isLoggedIn()"><a href="/my-rides">{{ 'header.my-rides' | translate }}</a></li>
+                <li style="text-align: center;" ng-show="isLoggedIn()"><a href="/">{{ 'header.search' | translate }}</a></li>
+                <li style="text-align: center;" ng-show="isLoggedIn()"><a href="/profile">{{ 'header.profile' | translate }}</a></li>
+                <li style="text-align: center;" ng-show="isLoggedIn()"><a href="#" ng-click="logout()">{{ 'header.logout' | translate }}</a></li>
+                <li style="text-align: center;" ng-hide="isLoggedIn()"><a href="/login">{{ 'header.login' | translate }}</a></li>
             </ul>
         </div>
     </div>
