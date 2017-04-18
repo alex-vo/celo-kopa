@@ -4,22 +4,22 @@
         <tt-error-messages></tt-error-messages>
         <tt-success-messages></tt-success-messages>
         <div class="alert alert-info" role="alert" ng-hide="vm.myRides.length > 0">
-            Uz doto brīdi piedāvāto braucienu nav.
+            {{ 'my-rides.no-rides' | translate }}
         </div>
         <div class="table-container" ng-show="vm.myRides.length > 0">
             <table class="tablesaw" data-tablesaw-mode="stack" tablesawrender>
                 <thead>
                     <tr>
-                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col>Virsraksts</th>
-                        <th scope="col" data-tablesaw-sortable-col>No</th>
-                        <th scope="col" data-tablesaw-sortable-col>Uz</th>
-                        <th scope="col" data-tablesaw-sortable-col>Izbraukšana</th>
-                        <th scope="col" data-tablesaw-sortable-col>Atbraukšana</th>
-                        <th scope="col" data-tablesaw-sortable-col>Komentārs</th>
-                        <th scope="col" data-tablesaw-sortable-col>Cena</th>
-                        <th scope="col" data-tablesaw-sortable-col>Auto reģ. numurs</th>
-                        <th scope="col" data-tablesaw-sortable-col>Brīvas vietas</th>
-                        <th scope="col" data-tablesaw-sortable-col>Vietas vispār</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col>{{ 'my-rides.title' | translate }}</th>
+                        <th scope="col" data-tablesaw-sortable-col>{{ 'my-rides.from' | translate }}</th>
+                        <th scope="col" data-tablesaw-sortable-col>{{ 'my-rides.to' | translate }}</th>
+                        <th scope="col" data-tablesaw-sortable-col>{{ 'my-rides.departure' | translate }}</th>
+                        <th scope="col" data-tablesaw-sortable-col>{{ 'my-rides.arrival' | translate }}</th>
+                        <th scope="col" data-tablesaw-sortable-col>{{ 'my-rides.comment' | translate }}</th>
+                        <th scope="col" data-tablesaw-sortable-col>{{ 'my-rides.price' | translate }}</th>
+                        <th scope="col" data-tablesaw-sortable-col>{{ 'my-rides.car-reg-number' | translate }}</th>
+                        <th scope="col" data-tablesaw-sortable-col>{{ 'my-rides.free-places' | translate }}</th>
+                        <th scope="col" data-tablesaw-sortable-col>{{ 'my-rides.places-overall' | translate }}</th>
                         <th scope="col" data-tablesaw-sortable-col></th>
                         <th scope="col" data-tablesaw-sortable-col></th>
                     </tr>
@@ -57,17 +57,17 @@
                             {{ride.placesOverall}}
                         </td>
                         <td>
-                            <a href="/edit-ride/{{ride.id}}">Rediģēt</a>
+                            <a href="/edit-ride/{{ride.id}}">{{ 'my-rides.edit' | translate }}</a>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary" ng-click="open(ride.id)">Dzēst</button>
+                            <button type="button" class="btn btn-primary" ng-click="open(ride.id)">{{ 'my-rides.delete' | translate }}</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <a href="/add-ride">Piedāvāt jaunu braucienu</a>
+        <a href="/add-ride">{{ 'my-rides.offer-new-ride' | translate }}</a>
     </div>
 </main>
 <div ng-include="'/resources/partials/footer.html'"></div>

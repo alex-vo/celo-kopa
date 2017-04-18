@@ -23,6 +23,7 @@ public class PasswordController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.POST, value = "restore")
     public void passwordLost(@RequestParam("id") String loginOrEmail){
+        //TODO: validate
         userService.restorePassword(loginOrEmail);
     }
 
@@ -32,6 +33,7 @@ public class PasswordController {
     public void changePassword(Principal principal,
                                @RequestParam("oldPassword") String oldPassword,
                                @RequestParam("newPassword") String newPassword){
+        //TODO: validate
         userService.changePassword(principal.getName(), oldPassword, newPassword);
     }
 

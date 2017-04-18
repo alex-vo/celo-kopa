@@ -7,46 +7,46 @@
             <form novalidate name="form" ng-submit="editProfile()">
                 <fieldset class="pure-group">
                     <div class="edit-profile-heading">
-                        <h2>{{ 'edit-profile.edit-profile' | translate }}Rediģēt profilu</h2>
+                        <h2>{{ 'edit-profile.edit-profile' | translate }}</h2>
                     </div>
 
                     <div class="w-row">
                         <div class="w-col w-col-6" ng-show="vm.registrationType=='PLAIN'">
-                            <p><b>{{ 'edit-profile.username' | translate }}Lietotāja vārds:</b> {{vm.userName}}</p>
+                            <p><b>{{ 'edit-profile.username' | translate }}:</b> {{vm.userName}}</p>
                         </div>
                         <div class="w-col w-col-6" ng-hide="vm.registrationType=='DRAUGIEM'">
-                            <p><b>{{ 'edit-profile.email' | translate }}E-pasts:</b> {{vm.email}}</p>
+                            <p><b>{{ 'edit-profile.email' | translate }}:</b> {{vm.email}}</p>
                         </div>
                     </div>
                     <div class="w-row">
                         <div class="w-col w-col-6">
                             <div class="form-group" show-errors>
-                                <label class="control-label">Vārds</label>
+                                <label class="control-label">{{ 'edit-profile.name' | translate }}</label>
                                 <input type="text" class="form-control" name="name" ng-model="vm.name"
                                        ng-disabled="(vm.registrationType=='FACEBOOK' || vm.registrationType=='DRAUGIEM') && vm.name" required />
-                                <p class="help-block" ng-if="form.name.$error.required">{{ 'edit-profile.name-is-mandatory' | translate }}Vārds ir obligāts</p>
+                                <p class="help-block" ng-if="form.name.$error.required">{{ 'edit-profile.name-is-mandatory' | translate }}</p>
                             </div>
                         </div>
                         <div class="w-col w-col-6">
                             <div class="form-group" show-errors>
-                                <label class="control-label">{{ 'edit-profile.surname' | translate }}Uzvārds</label>
+                                <label class="control-label">{{ 'edit-profile.surname' | translate }}</label>
                                 <input type="text" class="form-control" name="surname" ng-model="vm.surname"
-                                       ng-disabled="(vm.registrationType=='FACEBOOK' || vm.registrationType=='DRAUGIEM') && vm.surname" />
-                                <p class="help-block" ng-if="form.surname.$error.required">{{ 'edit-profile.surname-is-mandatory' | translate }}Uzvārds ir obligāts</p>
+                                       ng-disabled="(vm.registrationType=='FACEBOOK' || vm.registrationType=='DRAUGIEM') && vm.surname" required />
+                                <p class="help-block" ng-if="form.surname.$error.required">{{ 'edit-profile.surname-is-mandatory' | translate }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="w-row">
                         <div class="w-col w-col-6">
                             <div class="form-group" show-errors>
-                                <label class="control-label">{{ 'edit-profile.phone' | translate }}Telefona numurs</label>
+                                <label class="control-label">{{ 'edit-profile.phone' | translate }}</label>
                                 <input type="text" class="form-control" name="phone" ng-model="vm.phone" required />
-                                <p class="help-block" ng-if="form.phone.$error.required">{{ 'edit-profile.phone-is-mandatory' | translate }}Telefona numurs ir obligāts</p>
+                                <p class="help-block" ng-if="form.phone.$error.required">{{ 'edit-profile.phone-is-mandatory' | translate }}</p>
                             </div>
                         </div>
                         <div class="w-col w-col-6">
                             <div class="form-group" show-errors>
-                                <label class="control-label ">{{ 'edit-profile.birthday' | translate }}Dzimšanas diena</label>
+                                <label class="control-label ">{{ 'edit-profile.birthday' | translate }}</label>
                                 <table class="birthday-input-table">
                                     <tr>
                                         <td>
@@ -81,46 +81,40 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <p class="help-block" ng-show="form.day.$error.completeBirthday">{{ 'edit-profile.birthday-is-mandatory' | translate }}Dzimšanas datums ir obligāts</p>
+                                <p class="help-block" ng-show="form.day.$error.completeBirthday">{{ 'edit-profile.birthday-is-mandatory' | translate }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="w-row">
                         <div class="w-col w-col-12">
                             <div class="form-group">
-                                <label for="aboutMe" class="control-label ">{{ 'edit-profile.about-me' | translate }}Par mani</label>
-                                <textarea id="aboutMe" ng-model="vm.aboutMe" name="aboutMe" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="Piemērs: Es bieži braucu no Rīgas us Cēsīm un atpakaļ."></textarea>
+                                <label for="aboutMe" class="control-label ">{{ 'edit-profile.about-me' | translate }}</label>
+                                <textarea id="aboutMe" ng-model="vm.aboutMe" name="aboutMe" class="form-control ng-pristine ng-untouched ng-valid ng-empty" translate translate-attr-placeholder="edit-profile.i-often-drive" placeholder="Piemērs: Es bieži braucu no Rīgas us Cēsīm un atpakaļ."></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="w-row">
                         <div class="w-col w-col-6">
                             <div class="form-group">
-                                <label for="car" class="control-label">Mašīna</label>
-                                <input id="car" name="car" type="text" class="form-control" placeholder="Piemērs: Audi A6" ng-model="vm.car">
+                                <label for="car" class="control-label">{{ 'edit-profile.car' | translate }}</label>
+                                <input id="car" name="car" type="text" class="form-control" translate translate-attr-placeholder="edit-profile.example-car" placeholder="Piemērs: Audi A6" ng-model="vm.car">
                             </div>
                         </div>
                         <div class="w-col w-col-6">
                             <div class="form-group">
                                 <label for="carRegNumber" class="control-label ">{{ 'edit-profile.car-reg-number' | translate }}</label>
-                                <input id="carRegNumber" type="text" class="form-control" ng-model="vm.carRegNumber" name="carRegNumber" placeholder="Piemērs: AB-1234">
+                                <input id="carRegNumber" type="text" class="form-control" ng-model="vm.carRegNumber" name="carRegNumber" translate translate-attr-placeholder="edit-profile.example-reg-number" placeholder="Piemērs: AB-1234">
                             </div>
                         </div>
                     </div>
                     <div class="w-row">
                         <div class="w-col w-col-12">
-                            <button type="submit" ng-click="form.$setSubmitted();" class="btn btn-primary"><i class="glyphicon glyphicon-refresh spinning"></i>Saglabāt</button>
-                            <button type="button" class="btn" ng-click="cancel()">Atcelt</button>
+                            <button type="submit" ng-click="form.$setSubmitted();" class="btn btn-primary"><i class="glyphicon glyphicon-refresh spinning"></i>{{ 'edit-profile.save' | translate }}</button>
+                            <button type="button" class="btn" ng-click="cancel()">{{ 'edit-profile.cancel' | translate }}</button>
                         </div>
                     </div>
                 </fieldset>
             </form>
-            <div class="w-form-done">
-                <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-                <div>Oops! Something went wrong while submitting the form</div>
-            </div>
         </div>
     </div>
 </main>

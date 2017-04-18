@@ -1,12 +1,12 @@
 <div class="modal-content">
     <div class="modal-header ng-scope">
-        <h3 class="modal-title" id="modal-title">Profils nav pilns!</h3>
+        <h3 class="modal-title" id="modal-title">{{ 'not-full-profile.not-full-profile' | translate }}</h3>
     </div>
     <div class="modal-body ng-scope">
-        <p>Lai piedāvātu braucienu, lūdzu ievadiet nepiciešamo informāciju jūsu profilā.</p>
+        <p>{{ 'not-full-profile.complete-your-profile' | translate }}</p>
     </div>
     <div class="modal-footer ng-scope">
-        <button class="btn btn-primary" type="button" ng-click="$ctrl.gotoProfile()">Uz profilu</button>
-        <button class="btn" type="button" ng-click="$ctrl.cancel()">Atcelt</button>
+        <button class="btn btn-primary" type="button" ng-click="$ctrl.gotoProfile()">{{ 'not-full-profile.to-profile' | translate }}</button>
+        <button class="btn" type="button" ng-click="$ctrl.cancel()">{{ 'not-full-profile.cancel' | translate }}</button>
     </div>
 </div>

@@ -113,9 +113,9 @@ angular.module('frontendServices', [])
                 })
                 .then(function (response) {
                     if (response.status == 200) {
-                        deferred.resolve("Brauciens saglabāts");
+                        deferred.resolve("success.ride.saved");
                     } else {
-                        deferred.reject("Kļūda: " + response.data);
+                        deferred.reject("error.saving.ride");
                     }
                 });
 
@@ -135,7 +135,7 @@ angular.module('frontendServices', [])
                     if (response.status == 200) {
                         deferred.resolve(response.data);
                     } else {
-                        deferred.reject("Kļūda: " + response.data);
+                        deferred.reject("error.getting.ride");
                     }
                 });
 
@@ -154,9 +154,9 @@ angular.module('frontendServices', [])
                 })
                 .then(function (response) {
                     if (response.status == 200) {
-                        deferred.resolve("success.deleted-ride");
+                        deferred.resolve("success.ride.deleted");
                     } else {
-                        deferred.reject("error.deleted-ride: " + response.data);
+                        deferred.reject("error.deleting.ride");
                     }
                 });
 

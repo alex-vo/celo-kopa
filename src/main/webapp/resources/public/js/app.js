@@ -432,8 +432,8 @@ sampleApp.controller('NewUserCtrl', ['$scope', '$http', '$cookieStore', '$contro
     };
 });
 
-sampleApp.controller('DriveCtrl', ['$scope', 'DriveService', '$cookieStore', 'UserService', 'SearchService', '$routeParams', '$controller', '$filter', '$http', '$window', '$uibModal',
-    function ($scope, DriveService, $cookieStore, UserService, SearchService, $routeParams, $controller, $filter, $http, $window, $uibModal) {
+sampleApp.controller('DriveCtrl', ['$scope', 'DriveService', '$cookieStore', 'UserService', 'SearchService', '$routeParams', '$controller', '$filter', '$http', '$window', '$uibModal', '$translate',
+    function ($scope, DriveService, $cookieStore, UserService, SearchService, $routeParams, $controller, $filter, $http, $window, $uibModal, $translate) {
         $controller('BasicCtrl', {$scope: $scope});
 
         $http.get("/api/user/checkFullProfile").then(function(data){
@@ -519,7 +519,7 @@ sampleApp.controller('DriveCtrl', ['$scope', 'DriveService', '$cookieStore', 'Us
             promise.then(function(rideData) {
                 parseRideObject(rideData);
             }, function(errorMessage) {
-                $cookieStore.put("errorMessage", errorMessage);
+                $cookieStore.put("errorMessage", $translate.instant(errorMessage));
                 $scope.showMessages();
             });
         }
@@ -539,10 +539,10 @@ sampleApp.controller('DriveCtrl', ['$scope', 'DriveService', '$cookieStore', 'Us
             var rideObject = prepareRideObject();
             var promise = DriveService.addRide(rideObject);
             promise.then(function (successMessage) {
-                $cookieStore.put("succesMessage", successMessage);
+                $cookieStore.put("succesMessage", $translate.instant(successMessage));
                 window.location.href = "/my-rides";
             }, function (errorMessage) {
-                $cookieStore.put("errorMessage", errorMessage);
+                $cookieStore.put("errorMessage", $translate.instant(errorMessage));
                 $scope.showMessages();
             });
         };
@@ -573,13 +573,18 @@ sampleApp.directive('tablesawrender', function($timeout) {
     }
 });
 
-sampleApp.controller('MyRidesCtrl', ['$scope', '$cookieStore', 'DriveService', 'UserService', 'ngDialog', '$controller', '$uibModal',
-    function ($scope, $cookieStore, DriveService, UserService, ngDialog, $controller, $uibModal) {
+sampleApp.controller('MyRidesCtrl', ['$scope', '$cookieStore', 'DriveService', 'UserService', 'ngDialog', '$controller', '$uibModal', '$translate',
+    function ($scope, $cookieStore, DriveService, UserService, ngDialog, $controller, $uibModal, $translate) {
         $controller('BasicCtrl', {$scope: $scope});
 
         var loadRides = function(){
             DriveService.getMyRides().then(function(response){
-                $scope.vm.myRides = response.drives;
+                if(response.status == 200){
+                    $scope.vm.myRides = response.drives;
+                }else{
+                    $cookieStore.put("errorMessage", $translate.instant(data.data));
+                    $scope.showMessages();
+                }
             });
         };
 
@@ -600,7 +605,7 @@ sampleApp.controller('MyRidesCtrl', ['$scope', '$cookieStore', 'DriveService', '
             modalInstance.result.then(function () {
                 var promise = DriveService.deleteRide(rideId);
                 promise.then(function(successMessage) {
-                    $cookieStore.put("succesMessage", successMessage);
+                    $cookieStore.put("succesMessage", $translate.instant('success.ride.deleted'));
                     //TODO without refresh
                     location.reload();
                 }, function(errorMessage) {
@@ -653,8 +658,8 @@ sampleApp.directive('noCacheSrc', function($window) {
   }
 });
 
-sampleApp.controller('EditProfileCtrl', ['$scope', 'UserService', '$controller', '$location', '$http', '$cookieStore',
-    function ($scope, UserService, $controller, $location, $http, $cookieStore) {
+sampleApp.controller('EditProfileCtrl', ['$scope', 'UserService', '$controller', '$location', '$http', '$cookieStore', '$translate',
+    function ($scope, UserService, $controller, $location, $http, $cookieStore, $translate) {
         $controller('BasicCtrl', {$scope: $scope});
 
         $scope.submitted = false;
@@ -726,10 +731,10 @@ sampleApp.controller('EditProfileCtrl', ['$scope', 'UserService', '$controller',
             })
             .then(function(data) {
                 if(data.status == 200) {
-                    $cookieStore.put("succesMessage", "success.profile.updated");
+                    $cookieStore.put("succesMessage", $translate.instant("success.profile.updated"));
                     window.location.href = "/profile";
                 }else{
-                    $cookieStore.put("errorMessage", data.data);
+                    $cookieStore.put("errorMessage", $translate.instant(data.data));
                     $scope.showMessages();
                 }
             });
@@ -895,7 +900,7 @@ sampleApp.directive('tablesawrender', function($timeout) {
     }
 });
 
-sampleApp.controller('MyProfileCtrl', function ($scope, $controller, UserService, DriveService, $cookieStore, $http) {
+sampleApp.controller('MyProfileCtrl', function ($scope, $controller, UserService, DriveService, $cookieStore, $http, $translate) {
     $controller('BasicCtrl', {$scope: $scope});
 
     DriveService.getMyRides().then(function(response){
@@ -934,7 +939,7 @@ sampleApp.controller('MyProfileCtrl', function ($scope, $controller, UserService
             })
             .then(function(data) {
                 if(data.status == 200) {
-                    $cookieStore.put("succesMessage", "success.profile.picture.updated");
+                    $cookieStore.put("succesMessage", $translate.instant("success.profile.picture.updated"));
                     window.location.href = "/profile";
                 }else{
                     $cookieStore.put("errorMessage", data.data);
@@ -954,7 +959,7 @@ sampleApp.controller('MyProfileCtrl', function ($scope, $controller, UserService
         })
         .then(function(data) {
             if(data.status == 200) {
-                $cookieStore.put("succesMessage", "success.profile.picture.deleted");
+                $cookieStore.put("succesMessage", $translate.instant("success.profile.picture.deleted"));
                 window.location.href = "/profile";
             }else{
                 $cookieStore.put("errorMessage", data.data);
@@ -990,7 +995,7 @@ sampleApp.controller('RestorePasswordCtrl', ['$scope', '$cookieStore', '$http', 
                     $cookieStore.put("succesMessage", "Uz tavu e-pastu tika atsūtīta jauna parole.");
                     window.location.href = "/";
                 } else {
-                    $cookieStore.put("errorMessage", "error.restoring-password");
+                    $cookieStore.put("errorMessage", "error.restore.password");
                     $scope.showMessages();
                 }
             });
@@ -999,8 +1004,8 @@ sampleApp.controller('RestorePasswordCtrl', ['$scope', '$cookieStore', '$http', 
     }
 ]);
 
-sampleApp.controller('ChangePasswordCtrl', ['$scope', '$cookieStore', '$http', '$controller', '$window',
-    function ($scope, $cookieStore, $http, $controller, $window) {
+sampleApp.controller('ChangePasswordCtrl', ['$scope', '$cookieStore', '$http', '$controller', '$window', '$translate',
+    function ($scope, $cookieStore, $http, $controller, $window, $translate) {
         $controller('BasicCtrl', {$scope: $scope});
 
         $scope.changePassword = function () {
@@ -1018,10 +1023,10 @@ sampleApp.controller('ChangePasswordCtrl', ['$scope', '$cookieStore', '$http', '
             })
             .then(function(response) {
                 if (response.status == 200) {
-                    $cookieStore.put("succesMessage", "Parole tika nomainīta.");
+                    $cookieStore.put("succesMessage", $translate.instant('success.password.change'));
                     window.location.href = "/profile";
                 } else {
-                    $cookieStore.put("errorMessage", "error.changing-password");
+                    $cookieStore.put("errorMessage", $translate.instant('error.password.change'));
                     $scope.showMessages();
                 }
             });
