@@ -70,13 +70,15 @@
                             <div class="search-column w-col w-col-5">
                                 <div class="search-div">
                                     <label class="search-field-label">{{ 'home.from' | translate }}</label>
-                                    <input id="from" placeholder="Rīga" ng-model="from" class="search-field w-input" />
+                                    <input name="to" type="text" id="from" class="search-field w-input" placeholder="Rīga" ng-model="from"
+                                           uib-typeahead="address for address in getLocation($viewValue)" typeahead-editable='false' />
                                 </div>
                             </div>
                             <div class="search-column w-col w-col-5">
                                 <div class="search-div">
                                     <label class="search-field-label">{{ 'home.to' | translate }}</label>
-                                    <input id="to" placeholder="Daugavpils" ng-model="to" class="search-field w-input" />
+                                    <input name="to" type="text" id="to" class="search-field w-input" placeholder="Daugavpils" ng-model="to"
+                                           uib-typeahead="address for address in getLocation($viewValue)" typeahead-editable='false' />
                                 </div>
                             </div>
                             <div class="last-column w-col w-col-2">

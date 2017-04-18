@@ -178,73 +178,21 @@ sampleApp.controller('BasicCtrl', ['$scope', '$cookieStore', 'UserService', '$ti
     }
 ]);
 
-sampleApp.controller('SearchCtrl', ['$scope', 'SearchService', '$cookieStore', 'UserService', '$controller',
-    function($scope, SearchService, $cookieStore, UserService, $controller) {
+sampleApp.controller('SearchCtrl', ['$scope', 'SearchService', '$cookieStore', 'UserService', '$controller', '$http',
+    function($scope, SearchService, $cookieStore, UserService, $controller, $http) {
         $controller('BasicCtrl', {$scope: $scope});
-
-        $scope.validFromValues = [];
-        $scope.validToValues = [];
 
         $scope.onSearch = function(){
             var from = $("#from").val().toUpperCase();
             var to = $("#to").val().toUpperCase();
-            if($scope.validFromValues.indexOf(from) > -1 && $scope.validToValues.indexOf(to) > -1){
-                window.location.href = "search-results?from=" + from + "&to=" + to;
-            }
+            window.location.href = "search-results?from=" + from + "&to=" + to;
         };
 
-        //TODO: create separate function
-        $scope.fromLocalities = new Bloodhound({
-            datumTokenizer: function (datum) {
-                return Bloodhound.tokenizers.whitespace(datum.value);
-            },
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {
-                url: '/api/autocomplete?predicate=%QUERY',
-                filter: function (result) {
-                    $scope.validFromValues = result.localities.map(function(value){return value.toUpperCase();});
-                    return $.map(result.localities, function (locality) {
-                        return {
-                            value: locality
-                        };
-                    });
-                },
-                wildcard: '%QUERY'
-            }
-        });
-
-        $scope.toLocalities = new Bloodhound({
-            datumTokenizer: function (datum) {
-                return Bloodhound.tokenizers.whitespace(datum.value);
-            },
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {
-                url: '/api/autocomplete?predicate=%QUERY',
-                filter: function (result) {
-                    $scope.validToValues = result.localities.map(function(value){return value.toUpperCase();});
-                    return $.map(result.localities, function (locality) {
-                        return {
-                            value: locality
-                        };
-                    });
-                },
-                wildcard: '%QUERY'
-            }
-        });
-
-        // Initialize the Bloodhound suggestion engine
-        $scope.fromLocalities.initialize();
-        $scope.toLocalities.initialize();
-
-        $('#from').typeahead(null, {
-            displayKey: 'value',
-            source: $scope.fromLocalities.ttAdapter()
-        });
-
-        $('#to').typeahead(null, {
-            displayKey: 'value',
-            source: $scope.toLocalities.ttAdapter()
-        });
+        $scope.getLocation = function(val) {
+            return $http.get('/api/autocomplete?predicate=' + val).then(function(response){
+                return response.data.localities;
+            });
+        };
 
     }
 ]);
@@ -451,9 +399,6 @@ sampleApp.controller('DriveCtrl', ['$scope', 'DriveService', '$cookieStore', 'Us
             }
         });
 
-        $scope.validFromValues = [];
-        $scope.validToValues = [];
-
         $scope.ride = {};
 
         $scope.getLocation = function(val) {
@@ -579,10 +524,10 @@ sampleApp.controller('MyRidesCtrl', ['$scope', '$cookieStore', 'DriveService', '
 
         var loadRides = function(){
             DriveService.getMyRides().then(function(response){
-                if(response.status == 200){
+                if(response.drives){
                     $scope.vm.myRides = response.drives;
                 }else{
-                    $cookieStore.put("errorMessage", $translate.instant(data.data));
+                    $cookieStore.put("errorMessage", $translate.instant(response));
                     $scope.showMessages();
                 }
             });
