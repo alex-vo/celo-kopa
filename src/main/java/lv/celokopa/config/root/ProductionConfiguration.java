@@ -1,6 +1,7 @@
 package lv.celokopa.config.root;
 
-import lv.celokopa.app.init.TestDataInitializer;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +16,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 @Profile("production")
@@ -42,11 +40,6 @@ public class ProductionConfiguration extends WebMvcConfigurerAdapter {
 
     @Value("${mysql.password}")
     String mysqlPassword;
-
-    @Bean(initMethod = "init")
-    public TestDataInitializer initTestData() {
-        return new TestDataInitializer();
-    }
 
     @Bean(name = "datasource")
     public DriverManagerDataSource dataSource() {

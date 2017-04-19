@@ -197,8 +197,8 @@ sampleApp.controller('SearchCtrl', ['$scope', 'SearchService', '$cookieStore', '
     }
 ]);
 
-sampleApp.controller('LoginCtrl', ['$scope', '$cookieStore', '$http', '$controller',
-    function ($scope, $cookieStore, $http, $controller) {
+sampleApp.controller('LoginCtrl', ['$scope', '$cookieStore', '$http', '$controller', '$translate',
+    function ($scope, $cookieStore, $http, $controller, $translate) {
         $controller('BasicCtrl', {$scope: $scope});
 
         $scope.preparePostData = function () {
@@ -227,7 +227,7 @@ sampleApp.controller('LoginCtrl', ['$scope', '$cookieStore', '$http', '$controll
                     $cookieStore.put("preferredLanguage", response.data);
                     window.location.href = "/";
                 } else {
-                    $cookieStore.put("errorMessage", "error.authentication");
+                    $cookieStore.put("errorMessage", $translate.instant("error.authentication"));
                     $scope.showMessages();
                 }
             });
