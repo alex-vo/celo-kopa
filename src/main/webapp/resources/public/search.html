@@ -65,20 +65,20 @@
             <div class="search-form-container1 w-container">
                 <div class="find-buddies">{{ 'home.find-buddies' | translate }}</div>
                 <div class="w-form">
-                    <form class="search-form" ng-submit="onSearch()">
+                    <form novalidate name="searchForm" class="search-form" ng-submit="searchForm.$valid && onSearch()">
                         <div class="w-row">
                             <div class="search-column w-col w-col-5">
                                 <div class="search-div">
                                     <label class="search-field-label">{{ 'home.from' | translate }}</label>
                                     <input name="to" type="text" id="from" class="search-field w-input" placeholder="Rīga" ng-model="from"
-                                           uib-typeahead="address for address in getLocation($viewValue)" typeahead-editable='false' />
+                                           uib-typeahead="address for address in getLocation($viewValue)" typeahead-editable='false' required />
                                 </div>
                             </div>
                             <div class="search-column w-col w-col-5">
                                 <div class="search-div">
                                     <label class="search-field-label">{{ 'home.to' | translate }}</label>
                                     <input name="to" type="text" id="to" class="search-field w-input" placeholder="Daugavpils" ng-model="to"
-                                           uib-typeahead="address for address in getLocation($viewValue)" typeahead-editable='false' />
+                                           uib-typeahead="address for address in getLocation($viewValue)" typeahead-editable='false' required />
                                 </div>
                             </div>
                             <div class="last-column w-col w-col-2">
