@@ -142,5 +142,9 @@
   "error.saving.ride": "Kļūda brauciena saglabāšanā",
   "error.deleting.ride": "Kļūda brauciena dzēšanā",
   "error.getting.ride": "Kļūda brauciena iegūšanā",
-  "error.rides.search": "Kļūda braucienu meklēšanā"
+  "error.rides.search": "Kļūda braucienu meklēšanā",
+
+  "activated.profile.activated": "Profils ir aktivizēts.",
+  "activated.now.you.can": "Tagad jūs varat",
+  "activated.login": "ielogoties"
 }

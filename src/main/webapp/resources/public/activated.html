@@ -1,11 +1,11 @@
-<main>
+<main ng-controller="BasicCtrl">
     <header class="pure-g" ng-include="'/resources/partials/header.html'"></header>
     <div class="w-container">
         <tt-error-messages></tt-error-messages>
         <tt-success-messages></tt-success-messages>
         <br><br>
-        <div class="col-md-4 col-md-offset-4">
-            <p>Profils ir aktivizēts. Tagad jūs varat <a href="/login">ielogoties</a>.</p>
+        <div class="col-md-5 col-md-offset-4">
+            <p>{{ 'activated.profile.activated' | translate }} {{ 'activated.now.you.can' | translate }} <a href="/login">{{ 'activated.login' | translate }}</a>.</p>
         </div>
     </div>
 

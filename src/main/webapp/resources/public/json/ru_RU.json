@@ -142,5 +142,9 @@
   "error.saving.ride": "Ошибка при сохранении поездки",
   "error.deleting.ride": "Ошибка при удалении поездки",
   "error.getting.ride": "Ошибка при запросе на поездку",
-  "error.rides.search": "Ошибка при поиске поездок"
+  "error.rides.search": "Ошибка при поиске поездок",
+
+  "activated.profile.activated": "Профиль активирован.",
+  "activated.now.you.can": "Теперь вы можете",
+  "activated.login": "войти"
 }

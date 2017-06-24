@@ -224,9 +224,11 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
                 <configuration>
                     <contextFile>${basedir}/src/main/resources/context.xml</contextFile>
                     <path>/</path>
+                    <warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
                     <!--<httpsPort>8443</httpsPort>-->
                     <!--<keystoreFile>${basedir}/other/keystore.jks</keystoreFile>-->
                     <!--<keystorePass>secret</keystorePass>-->
