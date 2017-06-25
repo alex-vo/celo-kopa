@@ -16,8 +16,8 @@ import java.util.Date;
 @Table(name = "USERS")
 @NamedQueries({
         @NamedQuery(
-                name = User.FIND_BY_USERNAME,
-                query = "select u from User u where username = :username"
+                name = User.FIND_BY_USERNAME_OR_EMAIL,
+                query = "select u from User u where username = :username or email = :username"
         ),
         @NamedQuery(
                 name = User.FIND_BY_EMAIL,
@@ -26,7 +26,7 @@ import java.util.Date;
 })
 public class User extends AbstractEntity {
 
-    public static final String FIND_BY_USERNAME = "user.findByUserName";
+    public static final String FIND_BY_USERNAME_OR_EMAIL = "user.findByUserName";
     public static final String FIND_BY_EMAIL = "user.findByEmail";
 
     private String username;

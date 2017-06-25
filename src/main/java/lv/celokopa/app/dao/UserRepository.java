@@ -21,7 +21,7 @@ public class UserRepository {
 
     public User findUserByUsername(String username) {
 
-        List<User> users = em.createNamedQuery(User.FIND_BY_USERNAME, User.class)
+        List<User> users = em.createNamedQuery(User.FIND_BY_USERNAME_OR_EMAIL, User.class)
                 .setParameter("username", username)
                 .getResultList();
 
@@ -43,7 +43,7 @@ public class UserRepository {
 
     public boolean isUsernameAvailable(String username) {
 
-        List<User> users = em.createNamedQuery(User.FIND_BY_USERNAME, User.class)
+        List<User> users = em.createNamedQuery(User.FIND_BY_USERNAME_OR_EMAIL, User.class)
                 .setParameter("username", username)
                 .getResultList();
 
