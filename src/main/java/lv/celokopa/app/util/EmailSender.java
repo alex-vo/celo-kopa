@@ -14,13 +14,12 @@ import javax.mail.internet.MimeMessage;
  */
 public class EmailSender {
 
-    private static EmailSender INSTANCE;
+    private EmailSender(){}
+
+    private static EmailSender instance = new EmailSender();
 
     public static EmailSender getInstance(){
-        if(INSTANCE == null){
-            INSTANCE = new EmailSender();
-        }
-        return INSTANCE;
+        return instance;
     }
 
     public void sendEmail(String subject, String text, String recipient, String username, String password){

@@ -1,4 +1,4 @@
-package lv.celokopa.app;
+package lv.celokopa.test;
 
 import lv.celokopa.app.model.Locality;
 import lv.celokopa.app.model.SearchResult;
