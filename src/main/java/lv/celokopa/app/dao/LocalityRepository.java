@@ -24,18 +24,22 @@ public class LocalityRepository {
     EntityManager em;
 
     public List<Locality> findLocalities(String predicate){
+        LOGGER.info("findLocalities() invoked");
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
         CriteriaQuery<Locality> searchQuery = cb.createQuery(Locality.class);
         Root<Locality> searchRoot = searchQuery.from(Locality.class);
         searchQuery.select(searchRoot);
 
-        List<Predicate> predicates = new ArrayList<Predicate>();
-        predicates.add(cb.like(cb.upper(searchRoot.<String>get("title")), predicate.toUpperCase() + "%"));
+        //TODO: prevent possible sql injections
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(cb.like(cb.upper(searchRoot.get("title")), predicate.toUpperCase() + "%"));
 
         searchQuery.where(predicates.toArray(new Predicate[]{}));
 
         TypedQuery<Locality> filterQuery = em.createQuery(searchQuery);
-        return filterQuery.setMaxResults(10).getResultList();
+        List<Locality> result = filterQuery.setMaxResults(10).getResultList();
+        LOGGER.info("findLocalities() finished returning " + result.size() + " localities");
+        return result;
     }
 }

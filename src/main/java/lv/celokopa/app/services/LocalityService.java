@@ -22,9 +22,9 @@ public class LocalityService {
 
     @Transactional(readOnly = true)
     public SearchResult<Locality> findLocalities(String predicate) {
-
+        LOGGER.info("findLocalities() invoked");
         List<Locality> localities = localityRepository.findLocalities(predicate);
-
+        LOGGER.info("findLocalities() found " + localities.size() + " localities");
         return new SearchResult<>(localities.size(), localities);
     }
 }

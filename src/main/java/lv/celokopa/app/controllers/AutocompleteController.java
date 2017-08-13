@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * Created by alex on 16.3.1.
  */
@@ -26,8 +28,11 @@ public class AutocompleteController {
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
     public LocalitiesDTO autoComplete(@RequestParam("predicate") String predicate) {
-
+        LOGGER.info("autoComplete() method invoked with predicate=" + predicate);
         SearchResult<Locality> result = localityService.findLocalities(predicate);
-        return LocalitiesDTO.mapFromLocalityEntities(result.getResult());
+        List<Locality> resultList = result.getResult();
+        LocalitiesDTO localitiesDTO = LocalitiesDTO.mapFromLocalityEntities(resultList);
+        LOGGER.info("autoComplete() returning " + localitiesDTO + " with " + resultList.size() + " localities");
+        return localitiesDTO;
     }
 }
